@@ -5,7 +5,7 @@ date:   2014-01-30 14:07:01
 categories: relationships
 ---
 
-(More in my answer on Quora)[https://www.quora.com/How-can-I-not-argue-with-my-girlfriend/answer/Adam-Kochanowicz]
+[More in my answer on Quora](https://www.quora.com/How-can-I-not-argue-with-my-girlfriend/answer/Adam-Kochanowicz)
 
 - While these tips might work for readers with male partners, I think these tips are optimized for males in opposite-sex relationships.
 - Also, I've never been in a relationship with a man, so I have no idea how to avoid arguments with them.
