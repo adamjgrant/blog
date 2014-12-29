@@ -10,6 +10,9 @@ Your time is your personal fortune. Manage your wealth.
 - Stop treating the weekends as a magical bottomless bucket of time. 
   - The time you have over the weekend is exactly 48 hours minus the time you need for meals, chores, bathroom breaks, and sleeping in. When you actually sit down and count those hours, it's not as much as you think.
   - The amount of things you can procrastinate on Mon-Fri > the amount of time you have on the weekend.
+- Learn to say "No."
+  - The reason you have a lot of shit to do isn't because you need a fucking Pomodoro timer, it means you have too much to do.
+  - Sit down and write out all your commitments. Can you not remove anything from that list?
 - Learn how long things actually take.
   - If you keep finding yourself at 11pm on a Sunday frustrated that you didn't do everything you wanted, its because you say you'll take 5 minutes, when it really takes 45.
   - Keep estimating the time it takes to do things as you always did, but actually follow up with it. How long does it *really* take?
@@ -29,3 +32,6 @@ Your time is your personal fortune. Manage your wealth.
   - If any of these apps really benefit you, they are few and far between.
   - A perfect candidate for removal is an app you've added some to do items into, but never actually checked back on.
   - These apps are often poor stand-ins for deficiencies in your personal discipline.
+
+Also see:
+- [7 Things You Need to Stop Doing to Be More Productive, Backed by Science](https://medium.com/@cammipham/7-things-you-need-to-stop-doing-to-be-more-productive-backed-by-science-a988c17383a6)
