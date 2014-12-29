@@ -2,7 +2,7 @@
 layout: post
 title:  "How to Be More Productive"
 date:   2014-12-29 14:07:01
-categories: productivity efficiency
+categories: productivity
 ---
 
 Your time is your personal fortune. Manage your wealth.
@@ -25,3 +25,7 @@ Your time is your personal fortune. Manage your wealth.
   - Your inbox is not a to do list. Your goal should always be to have zero messages in your inbox.
   - If you cannot act on the email now, defer it to a calendar event to respond to it, or use a client that can delay items in your inbox like Mailbox or Google Inbox.
 - If you find you have too many things to do, the answer might not be to start doing them faster but to do fewer of them. Quitting can be good. Start unsubscribing from things you can live without. Life is short.
+- Prune your novelty productivity apps
+  - If any of these apps really benefit you, they are few and far between.
+  - A perfect candidate for removal is an app you've added some to do items into, but never actually checked back on.
+  - These apps are often poor stand-ins for deficiencies in your personal discipline.

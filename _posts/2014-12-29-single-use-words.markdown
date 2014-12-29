@@ -2,7 +2,7 @@
 layout: post
 title:  "Single Use Words"
 date:   2014-12-29 14:07:01
-categories: language english
+categories: language
 ---
 
 Together with Daniel Ryan Carter, I've been collecting some "Single Use Words." These are words that seem to remain
