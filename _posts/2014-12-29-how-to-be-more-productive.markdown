@@ -2,7 +2,7 @@
 layout: post
 title:  "How to Be More Productive"
 date:   2014-12-29 14:07:01
-categories: language english
+categories: productivity efficiency
 ---
 
 Your time is your personal fortune. Manage your wealth.
