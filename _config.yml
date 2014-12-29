@@ -3,7 +3,7 @@ title: Adam&#39;s Lists
 email: ajkochanowicz@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   "I don't blog. I write carefully-collected lists."
-baseurl: "/" # the subpath of your site, e.g. /blog/
+baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://adamslists.com" # the base hostname & protocol for your site
 twitter_username: ajkochanowicz
 github_username:  ajkochanowicz
