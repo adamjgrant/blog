@@ -30,3 +30,4 @@ Here's the list:
 - Amok (run)
 - Kink (hose)
 - Fledged (fully)
+- Sledge (hammer)
