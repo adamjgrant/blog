@@ -25,3 +25,16 @@ Mistakes people make when traveling
   - Hotel and restaurant wifi doesn't have a devops team behind it to troubleshoot when it goes down. To them, the wifi is just a little perk.
   - Some bars and restaurants will advertise free wifi to trap tourists. Once you've already started a tab, the wifi "isn't working today."
   - I carry around a [personal hotspot](http://www.amazon.com/gp/product/B00LT8S5UE/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) that gives me the option to buy a day's worth of wifi anywhere in the world for $10. It costs $100 and includes 5 days free.
+- Poor cost-evaluation of airline tickets
+  - Your United ticket may be $70 cheaper than the Delta ticket, but United will charge you $50 each way to check your luggage whereas it's free with Delta.
+  - [United breaks guitars](https://www.youtube.com/watch?v=5YGc4zOqozo).
+  - You may be trying to fly as cheap as possible, but ask yourself if it's really worth it not to pay a bit extra for more sleep the night before.
+
+Bonus
+
+- You may have a great outlet converter the size of a grapefruit, but USB is already universal.
+  - I haven't brought one of these clunky things on a trip in at least three years.
+  - If you have a MacBook, you can buy a cable replacement for the charger to charge your laptop in the destination country.
+  - Your MacBook is now a USB hub and external battery. No converter needed.
+  - More and more things are becoming USB chargeable, even electric toothbrushes.
+  - Airports are starting to provide USB ports.
