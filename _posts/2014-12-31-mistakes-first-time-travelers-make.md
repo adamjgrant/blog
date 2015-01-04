@@ -23,6 +23,7 @@ Mistakes people make when traveling
   - This is one of those few things that's worth paying extra for. 
 - Believing "Free Wifi" claims.
   - Hotel and restaurant wifi doesn't have a devops team behind it to troubleshoot when it goes down. To them, the wifi is just a little perk.
+    - Update (1/3/2015) [An article in the New York Times](http://www.nytimes.com/2015/01/04/opinion/sunday/brazen-attempts-by-hotels-to-block-wi-fi.html?rref=opinion&module=Ribbon&version=context&region=Header&action=click&contentCollection=Opinion&pgtype=article&_r=0) backs this up.
   - Some bars and restaurants will advertise free wifi to trap tourists. Once you've already started a tab, the wifi "isn't working today."
   - I carry around a [personal hotspot](http://www.amazon.com/gp/product/B00LT8S5UE/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) that gives me the option to buy a day's worth of wifi anywhere in the world for $10. It costs $100 and includes 5 days free.
 - Poor cost-evaluation of airline tickets
