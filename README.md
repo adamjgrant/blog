@@ -1,3 +1,7 @@
+# Setup
+
+- Run `make` and pray.
+
 # Create a new post
 
 - `bundle` first.
