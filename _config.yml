@@ -10,3 +10,9 @@ github_username:  ajkochanowicz
 
 # Build settings
 markdown: kramdown
+
+sass:
+  load_paths:
+    - "_sass"
+    - "_kickstart"
+    - "_kickstart/lib-core/sass"
