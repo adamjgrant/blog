@@ -20,3 +20,15 @@ These are honestly some of my favorite things.
 - [180s](http://www.180s.com/)
   - Winter clothing and accessories are already bulky and annoying. 180s are a dead simple alternative to a hat. 
   - Stays on tight, keeps ears warm, doesn't mess with your hair.
+- [Phillips Sonicare DiamondClean](http://www.sonicare.com/professional/en_us/OurProducts/DiamondClean.aspx)
+  - An awesome electric toothbrush with several simple settings. 
+  - Rarely needs to be charged, but uses an inductive charger disguised as an ordinary bathroom water glass.
+  - Beautifully designed. The whole front panel is matte white, otherwise showing mode selections with a cleverly camouflaged display.
+- [Quo Vadis Habana Notebook](http://quovadisplanners.com/notebooks/habana)
+  - Better than Moleskine. 
+  - Uses high-quality Clairefontaine paper.
+  - Simple, unasumming design.
+  - Thinner, yet stronger and better-bound sheets than other notebooks.
+- [Global 8" Chef Knife](http://www.amazon.com/Global-G-2-inch-Chefs-Knife/dp/B00005OL44/ref=sr_1_1?ie=UTF8&qid=1420662037&sr=8-1&keywords=global+8-inch+chef%27s+knife)
+  - Great multipurpose chef's knife.
+  - One single piece makes it both durable and easy to clean.
