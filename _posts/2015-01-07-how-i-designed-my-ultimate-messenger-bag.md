@@ -8,6 +8,7 @@ categories: stuff
 Status: On the drawing table
 
 Engineering considerations
+
 - Ergonomic
   - Purpose was not merely to "hold a lot of stuff."
     - Too much stuff = too much weight = contributes to back and posture issues later on in life.
@@ -19,6 +20,7 @@ Engineering considerations
   - See contents
 
 Design
+
 - [Inductive charger](http://www.amazon.com/PowerBot%C2%AE-PB1020-Inductive-Compatible-Smartphones/dp/B00F6SPYJS/ref=sr_1_1?ie=UTF8&qid=1420662922&sr=8-1&keywords=inductive+charger) compartment $20
   - Fits into custom pouch plugged into external battery pack
 - [USB battery](http://www.amazon.com/Poweradd-Pilot-2GS-10000mAh-Smartphones/dp/B00ITILPZ4/ref=sr_1_1?ie=UTF8&qid=1420663125&sr=8-1&keywords=usb+battery+pack) compartment to power inductive charger $20
