@@ -1,0 +1,18 @@
+ul.post-list
+  +list($style: 'unstyled')
+
+  > li
+    margin-bottom: $space * 2
+
+  .post-meta
+    color: map-get($gray, light)
+
+  h2
+    +heading-rg
+    margin-top: 0px
+
+.post-content
+  +wrapper
+  @media screen and (min-width: $tablet-landscape)
+    max-width: 700px
+    margin-left: 0
