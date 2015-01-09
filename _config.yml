@@ -1,5 +1,5 @@
 # Site settings
-title: Adam&#39;s Lists
+title: "Adam's Lists"
 email: ajkochanowicz@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   "I don't blog. I write carefully-collected lists."
@@ -14,5 +14,5 @@ markdown: kramdown
 sass:
   load_paths:
     - "_sass"
-    - "_kickstart"
-    - "_kickstart/lib-core/sass"
+    - "kickstart"
+    - "kickstart/lib-core/sass"
