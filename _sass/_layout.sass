@@ -1,2 +1,15 @@
-.navigation
-  +navbar($collapse: true, $layout: 'fluid')
+body
+  background: #EEE
+  padding-top: 45px
+
+.paper
+  +wrapper
+  background: white
+  padding-top: $space * 2
+
+  @media screen and (min-width: $tablet-landscape)
+    max-width: 1200px
+    box-shadow: 0 5px 5px #555
+
+.wrapper
+  +wrapper
