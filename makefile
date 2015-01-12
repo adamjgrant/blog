@@ -3,5 +3,5 @@ build:
 	@gem install jekyll
 	@echo "Updating Kickstart Submodule"
 	@git submodule update
-	@echo "Installing kickstart dependencies"
-	@cd kickstart;make setup
+	# @echo "Installing kickstart dependencies"
+	# @cd kickstart;make setup
