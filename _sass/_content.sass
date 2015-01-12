@@ -8,8 +8,9 @@ ul.post-list
     color: map-get($gray, light)
 
   h2
-    +heading-rg
+    +heading-sm
     margin-top: 0px
+    font-weight: 300
 
 .post-content
   +wrapper
@@ -22,3 +23,11 @@ ul.post-list
     -moz-columns: 2
     -webkit-columns: 2
     columns: 2
+
+h1.post-title
+  +heading-rg
+  font-weight: 500
+
+  @media screen and (min-width: $tablet)
+    +heading-xl
+    font-weight: 500
