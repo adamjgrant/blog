@@ -5,9 +5,10 @@ body
 .paper
   +wrapper
   background: white
-  padding:
-    top: $space * 2
-    bottom: $space * 2
+  padding: $space 0
+
+  @media screen and (min-width: $tablet)
+    padding: $space * 2
 
   @media screen and (min-width: $tablet-landscape)
     max-width: 1200px
