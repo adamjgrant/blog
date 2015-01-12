@@ -1,6 +1,6 @@
 # Setup
 
-- Run `make` and pray. 
+- Run `make` and pray.
 
 # Create a new post
 
