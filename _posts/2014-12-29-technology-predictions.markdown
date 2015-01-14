@@ -10,3 +10,4 @@ categories: technology
 - Computer systems will be redefined as actual clusters of hundreds, millions of tiny computers all bundled together and synchronized in a small package. This is analogous to the way human cells work. Each can work on its own and shares the same DNA. The effect on a system of the death of one cell is easily solved by replacing it by another, which is synchronized to the state of all the others. This is a paradigm shift away from single computers with many single differentiated components that constantly improve. In a cellular computer system, The collective integrity of the cells becomes the most important spec.
 - Computers will be grown, not just built.
 - Extraterrestrial habitats will be used no longer just for communication relay but actual data storage. ET storage networks will be part of the standard offering of what are today called “cloud” storage solutions.
+- The popularity of 3D printers will be slightly overshadowed by 3D copiers.
