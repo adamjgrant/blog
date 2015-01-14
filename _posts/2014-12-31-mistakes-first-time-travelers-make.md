@@ -4,7 +4,7 @@ title: "Mistakes First-Time Travelers Make"
 tags:
  -
 ---
-Mistakes people make when traveling
+![Traveller with too much luggage](http://cdn.everything.io/blog/traveller.jpg)
 
 - Trying to see absolutely everything instead of letting plans happen naturally.
   - Living in NYC, where a lot of friends come to visit, this one tops my list. Folks rush around getting stressed out trying to see absolutely everything without the patience and go-with-the-flow to enjoy any of it.
