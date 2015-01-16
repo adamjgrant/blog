@@ -11,8 +11,19 @@ github_username:  ajkochanowicz
 # Build settings
 markdown: kramdown
 
+gems:
+  - "autoprefixer-rails"
+  - "jekyll-assets"
+
 sass:
   load_paths:
+    - "_sass"
+    - "kickstart"
+    - "kickstart/lib-core/sass"
+assets:
+  sources:
+    - "_assets/javascripts"
+    - "_assets/stylesheets"
     - "_sass"
     - "kickstart"
     - "kickstart/lib-core/sass"
