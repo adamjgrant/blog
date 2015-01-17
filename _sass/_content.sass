@@ -36,16 +36,21 @@ ul.post-list
     vertical-align: middle
     margin-right: 5px
     margin:
-      top: $space
-      bottom: $space
+      top: 0
+      bottom: 0
 
   .post-subheader
     text-align: left
+    margin-bottom: $space
 
   .rss-subscribe,
   .post-meta
     margin: 0
     font-size: 1rem
+    margin-top: $space
+
+    +gt($phone)
+      margin-top: 0
 
   .rss-subscribe
     vertical-align: center
