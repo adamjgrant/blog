@@ -21,4 +21,9 @@ No problem. He's a busy guy.
 
 ![Elon Musk announces Space Internet](http://cdn.everything.io/blog/musk/musk.png)
 
+I also sent the idea to the CEO of Backblaze, but he hasn't announced anything ;)
+
+<blockquote class="twitter-tweet" lang="fr"><p><a href="https://twitter.com/ajkochanowicz">@ajkochanowicz</a> not extensively. Have a proposal?</p>&mdash; Gleb Budman (@GlebBudman) <a href="https://twitter.com/GlebBudman/status/543710215984525315">13 Décembre 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
