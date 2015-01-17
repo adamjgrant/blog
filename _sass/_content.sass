@@ -13,6 +13,10 @@ ul.post-list
     font-weight: 300
 
 .post-content
+  +p(true)
+
+  p
+    +p(true)
 
   @media screen and (min-width: $tablet-landscape)
     max-width: 700px
@@ -31,10 +35,22 @@ ul.post-list
     display: inline-block
     vertical-align: middle
     margin-right: 5px
+    margin:
+      top: $space
+      bottom: $space
+
+  .rss-subscribe,
+  .post-meta
+    margin: 0
+
+  .rss-subscribe
+    vertical-align: center
+    display: inline-block
 
   .post-meta
     display: inline-block
     color: map-get($gray, light)
+    margin-right: $space
 
   .post-header
     margin-bottom: $space * 2

@@ -8,9 +8,9 @@ layout: default
       <h1 class="post-title">{{ page.title }}</h1>
       <img class="gravatar" />
       <p class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+      <p class="rss-subscribe"><a href="http://feeds.feedburner.com/adamslists">Subscribe to Adam's Lists</a></p>
     </header>
 
-    <p class="rss-subscribe"><a href="http://feeds.feedburner.com/adamslists">Subscribe to Adam's Lists</a></p>
 
     {{ content }}
   </article>
