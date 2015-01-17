@@ -29,8 +29,8 @@ ul.post-list
       bottom: $space * 2
 
   .gravatar
-    width: 50px
-    height: 50px
+    width: 25px
+    height: 25px
     border-radius: 50%
     display: inline-block
     vertical-align: middle
@@ -39,21 +39,36 @@ ul.post-list
       top: $space
       bottom: $space
 
+  .post-subheader
+    text-align: left
+
   .rss-subscribe,
   .post-meta
     margin: 0
+    font-size: 1rem
 
   .rss-subscribe
     vertical-align: center
     display: inline-block
+
+    a
+      color: map-get($colors, orange)
+
+    svg
+      width: 25px
+      height: 25px
+      display: inline-block
+      vertical-align: top
+      fill: map-get($colors, orange)
 
   .post-meta
     display: inline-block
     color: map-get($gray, light)
     margin-right: $space
 
+
   .post-header
-    margin-bottom: $space * 2
+    // margin-bottom: $space * 2
 
 .post-list
   @media screen and (min-width: $tablet-landscape)
@@ -68,3 +83,7 @@ h1.post-title
   @media screen and (min-width: $tablet)
     +heading-xl
     font-weight: 500
+    text-align: center
+
+  +gt($tablet-landscape)
+    text-align: left
