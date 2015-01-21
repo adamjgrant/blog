@@ -1,3 +1,6 @@
 [submodule "kickstart"]
 	path = kickstart
 	url = https://github.com/ajkochanowicz/kickstart.git
+[submodule "_sass/AdamUX-Theme"]
+	path = _sass/AdamUX-Theme
+	url = git@github.com:ajkochanowicz/AdamUX-Theme.git
