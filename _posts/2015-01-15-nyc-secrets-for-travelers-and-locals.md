@@ -18,3 +18,11 @@ tags:
 <div class="images">
   <iframe width="560" height="315" src="//www.youtube.com/embed/dXPECTQTW_I" frameborder="0" allowfullscreen></iframe>
 </div>
+
+- [Grand Central's Black Spot](https://www.google.com/search?q=grand+central+black+spot&espv=2&biw=1280&bih=1301&tbm=isch&tbo=u&source=univ&sa=X&ei=9O2_VILSF8GngwSIyoDgAw&ved=0CDkQsAQ#imgdii=_)
+  - When Grand Central's dirty, tobacco-stained ceiling was cleaned and repainted with the now reknown blue zodiac painting,
+    a single spot of the original ceiling was left as a reminder to patrons of how it used to be.
+
+<a href="http://cdn.everything.io/blog/nyc-travel/dirty-brick.jpg">
+  <img src="http://cdn.everything.io/blog/nyc-travel/dirty-brick.jpg" />
+</a>
