@@ -5,6 +5,13 @@ tags:
  -
 ---
 
+- Every two weeks, pay off all your credit cards
+  - As long as you pay every two weeks, you don't have to worry about the due dates for every single account. If you make this cycle, you'll always pay on time.
+  - In case you missed the cycle or something happens with the payment itself, your chances are less that it will actually be late.
+- Read up on your credit card perks
+  - Most of us at least have one credit card, but we may not realize the kind of perks you get with it beyond the points.
+  - Many offer insurance on purchases, especially those for travel
+  - You may be spending needlessly on things like rental car insurance when all you need to do is pay for the regular fees with the right card.
 - The zero balance trick
   - Choose a dollar amount that is your zero balance so you'll never overdraft or have to beg for payday to come around. 
   - For example, if my number is 100 and my bank account has $1000, I tell myself i have $900. 
