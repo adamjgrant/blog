@@ -5,7 +5,6 @@ date:   2014-12-29 14:07:01
 categories: technology
 ---
 
-<<<<<<< HEAD
 After having silently made predictions to myself about the future of technology and seeing them come to fruition, it dawned
 on me I ought to make this stuff public.
 
