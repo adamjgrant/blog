@@ -1,11 +1,11 @@
 # Site settings
 title: "Adam's Lists"
-email: ajkochanowicz@gmail.com
+email: hello@adamgrant.me
 description: > # this means to ignore newlines until "baseurl:"
   "I don't blog. I write carefully-collected lists."
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://adamslists.com" # the base hostname & protocol for your site
-twitter_username: ajkochanowicz
+twitter_username: NiceGoingAdam
 github_username:  ajkochanowicz
 
 # Build settings

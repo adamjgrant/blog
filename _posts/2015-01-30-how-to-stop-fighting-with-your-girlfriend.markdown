@@ -35,3 +35,8 @@ Both of you need to hold each other to:
 - No "Empathy by example." This is when you want someone to feel how badly something hurts by just doing it back to them.
   - However, it is okay to use past examples where the tables were turned to help them to see how you might be hurt.
 - Again, no raising voices, no insults, no swearing.
+
+Great reading:
+
+- [Mixed Signals: Why People Misunderstand Each Other](http://www.theatlantic.com/health/archive/2015/04/mixed-signals-why-people-misunderstand-each-other/391053/?single_page=true)
+- [10 Lessons for Transforming your Marriage](http://www.amazon.com/Lessons-Transform-Your-Marriage-Strengthening/dp/1400050197) is about marriage, but is really about relationships in general.

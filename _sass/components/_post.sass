@@ -1,0 +1,23 @@
+[data-component="post"], [data-block="posts"] > li
+  margin-bottom: $space*2
+  max-width: $phablet
+
+  +gt($desktop)
+    max-width: $tablet
+  
+  h1
+    margin-bottom: $space/2
+    line-height: 1.8rem
+
+    a
+      color: $default-font-color
+      +heading_sm
+
+    +gt($tablet)
+      a
+        +heading_rg
+        line-height: 2.6rem
+
+  h2
+    +heading_xxs
+    margin-top: 0

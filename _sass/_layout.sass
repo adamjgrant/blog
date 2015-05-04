@@ -1,5 +1,4 @@
 body
-  background: #EEE
   padding-top: 45px
 
 .paper
@@ -12,10 +11,12 @@ body
 
   @media screen and (min-width: $tablet-landscape)
     max-width: 1200px
-    box-shadow: 0 5px 5px #555
 
 .wrapper
   +wrapper
+
+  +gt($desktop)
+    max-width: 1200px
 
 .desktop
   @media screen and (max-width: $tablet-landscape)
