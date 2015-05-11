@@ -129,4 +129,6 @@ It is a signature. Writing your name is only one form. Anything that uniquely ti
 the document back to your execution is a signature. Fingerprints, DNA, passwords,
 these are all signatures with varying degrees of security.
 
-And it might **not** be better than a written signature written with a pen.
+And it might **not** be better than a written signature written with a pen. Again,
+this is specifically aimed as a solution to those Etch-a-Sketchy low res LCD
+displays.
