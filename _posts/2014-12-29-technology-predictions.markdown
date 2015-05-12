@@ -27,7 +27,9 @@ Normally I don't make posts filled with Twitter embeds, but I figure it's a simp
 
 - Computers (as we know of them today) of the future will be available at a cost so low that they might as well be disposable. Not just at the $25-$35 pricepoint of today, but $0-0.01.
   - Computer systems will be redefined as actual clusters of hundreds, millions of tiny computers all bundled together and synchronized in a small package. This is analogous to the way human cells work. Each can work on its own and shares the same DNA. The effect on a system of the death of one cell is easily solved by replacing it by another, which is synchronized to the state of all the others. This is a paradigm shift away from single computers with many single differentiated components that constantly improve. In a cellular computer system, The collective integrity of the cells becomes the most important spec.
-- Computers will be grown, not just built.
+
+<blockquote class="twitter-tweet" lang="fr"><p lang="en" dir="ltr">Computers will be grown, not just built.</p>&mdash; Adam Grant (@NiceGoingAdam) <a href="https://twitter.com/NiceGoingAdam/status/598214940848185344">12 Mai 2015</a></blockquote>
+
 - Extraterrestrial habitats will be used no longer just for communication relay but actual data storage. ET storage networks will be part of the standard offering of what are today called “cloud” storage solutions.
 - The popularity of 3D printers will be slightly overshadowed by 3D copiers.
 
