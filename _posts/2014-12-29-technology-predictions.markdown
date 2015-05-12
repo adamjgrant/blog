@@ -44,5 +44,7 @@ into words succinctly.
 
 <blockquote class="twitter-tweet" lang="fr"><p lang="en" dir="ltr">The base components of computers (diodes &amp; transistors) are fundamentally incompatible with true intelligence, but a new type of…</p>&mdash; Adam Grant (@NiceGoingAdam) <a href="https://twitter.com/NiceGoingAdam/status/598209298909507584">12 Mai 2015</a></blockquote>
 <blockquote class="twitter-tweet" lang="fr"><p lang="en" dir="ltr">…mechanical component could be developed whereby processing of information occured not by gates and switches but paths of probability.</p>&mdash; Adam Grant (@NiceGoingAdam) <a href="https://twitter.com/NiceGoingAdam/status/598210393106980864">12 Mai 2015</a></blockquote>
+<blockquote class="twitter-tweet" lang="fr"><p lang="en" dir="ltr">...those paths of probability could be reinforced or atrophied by learning.</p>&mdash; Adam Grant (@NiceGoingAdam) <a href="https://twitter.com/NiceGoingAdam/status/598212937526968320">12 Mai 2015</a></blockquote>
+<blockquote class="twitter-tweet" lang="fr"><p lang="en" dir="ltr">... Learning and Action are not hard to recreate in a machine, it&#39;s the in between part.</p>&mdash; Adam Grant (@NiceGoingAdam) <a href="https://twitter.com/NiceGoingAdam/status/598212965909831680">12 Mai 2015</a></blockquote>
 
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
