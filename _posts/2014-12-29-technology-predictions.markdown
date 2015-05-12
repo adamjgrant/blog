@@ -15,7 +15,7 @@ Normally I don't make posts filled with Twitter embeds, but I figure it's a simp
 <blockquote class="twitter-tweet" lang="fr"><p>Battery advancements will continue to be incremental but the way we use them will drastically change.</p>&mdash; Adam Kochanowicz (@ajkochanowicz) <a href="https://twitter.com/ajkochanowicz/status/559018043985395712">24 Janvier 2015</a></blockquote>
 
 - Battery advancements will continue to be incremental but the way we use them will drastically change. Just as today we use hotspots for internet, we will also see hotspots of energy. First, these will be novelty, often sponsored wireless charging zones, but eventually more robust cellular networks that are available from either cell phone service providers or third parties. 
-  - There is a fundamental issue with packing more energy potential into a small space (safety) that is not as grave as packing more transistors into a chip. For this reason, the *way* we consume that power needs to deviate to carrying our own little supply with us everywhere we go.
+  - There is a fundamental issue with packing more energy potential into a small space (safety) whose consequences are more grave than packing more transistors into a chip. For this reason, the *way* we consume that power needs to deviate to carrying our own little supply with us everywhere we go.
   - That is not to say batteries won't continue to exist, but that their ability and ease of being charged will overcome their shortcomings in capacity.
   - **Update** January 20, 2015: We are starting to see some of this creep up, although [only with inductive charging](http://thenextweb.com/uk/2015/01/20/starbucks-starts-wireless-charging-pilot-uk/).
 
@@ -36,5 +36,13 @@ Normally I don't make posts filled with Twitter embeds, but I figure it's a simp
 # Phone numbers disappear (1/24/2015)
 
 <blockquote class="twitter-tweet" lang="fr"><p>Phone numbers will eventually die out as addresses for contacting one another.</p>&mdash; Adam Kochanowicz (@ajkochanowicz) <a href="https://twitter.com/ajkochanowicz/status/559017523757481984">24 Janvier 2015</a></blockquote>
+
+# A new type of machine for AI (5/12/2015)
+
+I actually began thinking about this around 2006 but have struggled to put it
+into words succinctly.
+
+<blockquote class="twitter-tweet" lang="fr"><p lang="en" dir="ltr">The base components of computers (diodes &amp; transistors) are fundamentally incompatible with true intelligence, but a new type of…</p>&mdash; Adam Grant (@NiceGoingAdam) <a href="https://twitter.com/NiceGoingAdam/status/598209298909507584">12 Mai 2015</a></blockquote>
+<blockquote class="twitter-tweet" lang="fr"><p lang="en" dir="ltr">…mechanical component could be developed whereby processing of information occured not by gates and switches but paths of probability.</p>&mdash; Adam Grant (@NiceGoingAdam) <a href="https://twitter.com/NiceGoingAdam/status/598210393106980864">12 Mai 2015</a></blockquote>
 
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
