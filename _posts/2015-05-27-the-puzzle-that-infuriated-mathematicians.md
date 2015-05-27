@@ -40,6 +40,23 @@ there?
 
 # The explanation
 
+## A conceptual explanation
+
+Keep in mind that your odds of winning were originally 1 out of 3.
+
+Imagine instead of the host revealing the goat door, she just says to you, "If
+there's a car in one of the other doors and you don't pick it, I'll let you
+know."
+
+It's basically the same thing. You are going to be told which one of the two
+doors is a goat door, just not by opening it before you choose to switch.
+
+So while your original door still has 1/3rd odds of being correct, the other two
+doors, each having 1/3rd odds themselves, have basically fused into one. Just by
+switching, you fall into the other 2/3rds.
+
+## A model-based explanation
+
 Let's use `G` and `C` to represent cars and goats respectively.
 
     G  G  C
