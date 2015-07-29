@@ -7,3 +7,4 @@ build:
 	@bundle
 	# @echo "Installing kickstart dependencies"
 	# @cd kickstart;make setup
+	@gem install thor
