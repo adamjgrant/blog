@@ -211,6 +211,6 @@ get_gravatar = (email, size) ->
   size = size or 80
   "http://www.gravatar.com/avatar/" + MD5(email) + ".jpg?s=" + size
 
-$src = get_gravatar "ajkochanowicz@gmail.com", 100
+$src = get_gravatar "adamjgrant@gmail.com", 100
 if k$.$$('.gravatar').length
   $gravatar.src = $src for $gravatar in k$.$$('.gravatar')

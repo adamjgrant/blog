@@ -12,7 +12,7 @@ of our future. [See my future technology predictions]({% post_url 2014-12-29-tec
 
 I wonder who would get a kick out of an idea like that. Maybe Elon Musk!
 
-<blockquote class="twitter-tweet" lang="fr"><p><a href="https://twitter.com/elonmusk">@elonmusk</a> No one has yet offered an Extraterrestrial data storage service, have they? Want to do it?</p>&mdash; Adam Kochanowicz (@ajkochanowicz) <a href="https://twitter.com/ajkochanowicz/status/542769908447080448">10 Décembre 2014</a></blockquote>
+<blockquote class="twitter-tweet" lang="fr"><p><a href="https://twitter.com/elonmusk">@elonmusk</a> No one has yet offered an Extraterrestrial data storage service, have they? Want to do it?</p>&mdash; Adam Kochanowicz (@adamjgrant) <a href="https://twitter.com/adamjgrant/status/542769908447080448">10 Décembre 2014</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 No response, but no problem. He's a busy guy.
@@ -23,7 +23,7 @@ No response, but no problem. He's a busy guy.
 
 I also sent the idea to the CEO of Backblaze, but he hasn't announced anything ;)
 
-<blockquote class="twitter-tweet" lang="fr"><p><a href="https://twitter.com/ajkochanowicz">@ajkochanowicz</a> not extensively. Have a proposal?</p>&mdash; Gleb Budman (@GlebBudman) <a href="https://twitter.com/GlebBudman/status/543710215984525315">13 Décembre 2014</a></blockquote>
+<blockquote class="twitter-tweet" lang="fr"><p><a href="https://twitter.com/adamjgrant">@adamjgrant</a> not extensively. Have a proposal?</p>&mdash; Gleb Budman (@GlebBudman) <a href="https://twitter.com/GlebBudman/status/543710215984525315">13 Décembre 2014</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
