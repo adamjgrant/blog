@@ -30,11 +30,11 @@ Say you had a button that will pull down the number of members from a database.
       });
     });
 
-    var getData = (url) => {
+    var getData = (url, cb) => {
       req = new XMLHttpRequest();
       req.open('GET', url, true);
       req.onload = () => {
-      
+        cb();
       };
       req.send();
     }
@@ -51,13 +51,14 @@ We can add a test to this
       });
     });
 
-    var getData = (url) => {
+    var getData = (url, cb) => {
       req = new XMLHttpRequest();
       req.open('GET', url, true);
       req.onload = () => {
         
         testRunner.specs.getMembersSpec(true);
 
+        cb();
       };
       req.send();
     }
@@ -82,7 +83,7 @@ Or maybe we want to make sure a certain number of members are returned each time
       });
     });
 
-    var getData = (url) => {
+    var getData = (url, cb) => {
       req = new XMLHttpRequest();
       req.open('GET', url, true);
       req.onload = () => {
@@ -90,6 +91,7 @@ Or maybe we want to make sure a certain number of members are returned each time
 
         testRunner.specs.getMembersSpec([true, [data.members]]);
 
+        cb();
       };
       req.send();
     }
