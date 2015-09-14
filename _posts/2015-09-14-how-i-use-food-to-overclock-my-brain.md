@@ -63,6 +63,15 @@ mind because the natural companion to a banana in a smoothie (in my mind) is a s
 You might have a similar instinct if I gave you the phrase "A peanut-butter and ______
 sandwich". PB&J just go together because you chunked those two items together long ago.
 
+When you think about the chunking you can do, you have to wonder what the limit really is.
+Imagine the following memory aid, in terms of chunks:
+
+    1. **Butter**y **Orange**y **onion** bread
+    2. **Cauliflower** and **olive** pizza
+    3. **Tomato** and **spinach** smoothie
+
+That's 82302715443256 that you just memorized!
+
 # An iPhone app that helped me
 
 ![Eidetic iPhone App](http://cdn.everything.io/blog/memory/eidetic.jpg)
