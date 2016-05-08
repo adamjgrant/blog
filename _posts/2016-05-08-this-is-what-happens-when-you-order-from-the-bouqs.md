@@ -26,3 +26,9 @@ So I reached out to the company and got this response:
 
 ![response](http://cdn.everything.io/blog/bouqs/response.jpg)
 
+It's unbelievable, isn't it? They rip you off of $80, send an embarassing
+bouquet to your loved one, and tell you to take $10 in store credit to shut up.
+Literally giving you nothing unless you buy more stuff from them.
+
+Have a Happy Mother's day and don't make the same mistake I did by doing business
+with The Bouqs.
