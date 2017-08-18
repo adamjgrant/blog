@@ -2,6 +2,10 @@
 
 - Run `make` and pray.
 
+# View blog
+
+- `jekyll serve`
+
 # Create a new post
 
 - `bundle` first.
