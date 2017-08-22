@@ -4,7 +4,7 @@
 
 # View blog
 
-- `jekyll serve`
+- `jekyll serve --drafts`
 
 # Create a new post
 
