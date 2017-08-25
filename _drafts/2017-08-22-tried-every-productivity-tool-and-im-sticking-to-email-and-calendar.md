@@ -4,6 +4,11 @@ title: "Tried Every Productivity Tool and I'm Sticking to Email and Calendar"
 tags:
  -
 ---
+
+I can rest easy that if I just pledge my limited attention span and memory to two things,
+everything I need will be there. With just the addition of a to do list, a third tool, I've now have
+another thing I have to remember to check. But the issues with to do list go even deeper.
+
 # If there's one takeaway from this article it's this
 You're more likely to get something done if you have a time and a place.
 

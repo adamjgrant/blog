@@ -1,0 +1,5 @@
+foo
+bar
+fizz
+
+<a href="#">bar</a>
