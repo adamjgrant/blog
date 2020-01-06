@@ -66,10 +66,10 @@ Instead of putting bookmarks in my browser, I link certain key combinations to f
 
 This is great for ticketing systems where URLs follow a certain formula. If in JIRA someone tells me to look at ticket 593, I can just type a keystroke to type
 
-    https://jira.apple.com/browse/PRJ-
+    https://jira.com/browse/PRJ-
 
 And type in 593 at the end.
 
-    https://jira.apple.com/browse/PRJ-593
+    https://jira.com/browse/PRJ-593
 
 
