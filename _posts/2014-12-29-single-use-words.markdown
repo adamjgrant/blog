@@ -5,6 +5,8 @@ date:   2014-12-29 14:07:01
 categories: language
 ---
 
+Just for fun.
+
 Together with Daniel Ryan Carter, I've been collecting some "Single Use Words." These are words that seem to remain
 in the English language only because they are use in a single expression.
 

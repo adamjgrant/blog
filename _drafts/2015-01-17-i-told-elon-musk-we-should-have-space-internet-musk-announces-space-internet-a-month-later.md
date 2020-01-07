@@ -5,7 +5,7 @@ tags:
  -
 ---
 
-I   had this great idea for putting data storage in space last month.
+I had this great idea for putting data storage in space last month.
 You know, you could host servers and back up all your data there.
 This wasn't a joke. I really see this as a significant and inevitable part
 of our future. [See my future technology predictions]({% post_url 2014-12-29-technology-predictions %}).
