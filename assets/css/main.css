@@ -2138,7 +2138,7 @@ body {
     line-height: 2.5rem;
     color: #555;
     font-size: 1.8rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     margin-top: 2rem;
     font-weight: 100;
     font-weight: 400; }
@@ -2181,4 +2181,12 @@ body {
       [data-component="post"] .post-header h1:first-child, [data-component="post"] .post-header h1 a:first-child, [data-block="posts"] > li .post-header h1:first-child, [data-block="posts"] > li .post-header h1 a:first-child {
         margin-top: 0; }
 
+.home {
+  margin-top: 50px;
+}
 
+@media screen and (min-width: 1200px) {
+  .home {
+    margin-top: 75px;
+  }
+}
