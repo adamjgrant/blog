@@ -16,6 +16,7 @@ gems:
   - "jekyll-assets"
 
 sass:
+  sass_dir: _sass
   load_paths:
     - "_sass"
     - "kickstart"

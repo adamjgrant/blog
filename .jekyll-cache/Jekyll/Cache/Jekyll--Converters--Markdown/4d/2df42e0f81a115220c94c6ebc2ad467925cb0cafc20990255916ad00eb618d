@@ -1,0 +1,142 @@
+I"�<p>From Wikipedia:</p>
+
+<p>“After the problem appeared in Parade, approximately 10,000 readers,
+including nearly 1,000 with PhDs, wrote to the magazine, most of them
+claiming vos Savant was wrong (Tierney 1991). Even when given explanations,
+simulations, and formal mathematical proofs, many people still do not accept
+that switching is the best strategy (vos Savant 1991a). Paul Erdős, one of
+the most prolific mathematicians in history, remained unconvinced until he
+was shown a computer simulation confirming the predicted result (Vazsonyi
+  1999).”</p>
+
+<p>This is the story about the Monty Hall Problem. A very simple puzzle of game
+show statistics that goes against common sense. I’ve always liked this problem
+but haven’t found a way to explain why the answer is what it is until now.</p>
+
+<h1 id="the-problem">The problem</h1>
+
+<p><img src="http://cdn.everything.io/blog/monty-hall/3doors.png" alt="Monty Hall Problem" /></p>
+
+<p>Suppose you’re on a game show, and you’re given the choice of three doors:
+Behind one door is a car; behind the others, goats. You pick a door, say No. 1,
+and the host, who knows what’s behind the doors, opens another door, say No. 3,
+which has a goat. He then says to you, “Do you want to pick door No. 2?” Is it
+to your advantage to switch your choice?</p>
+
+<h1 id="the-solution">The solution</h1>
+
+<p>You’re better off switching every time. 66% of the time you’ll get the car.</p>
+
+<p>If you’re like me, you expected to get the car only 50% of the time. After all,
+one has the goat and one has the car. There’s not much more to it than that is
+there?</p>
+
+<h1 id="the-explanation">The explanation</h1>
+
+<h2 id="a-conceptual-explanation">A conceptual explanation</h2>
+
+<p>Keep in mind that your odds of winning were originally 1 out of 3.</p>
+
+<p>Imagine instead of the host revealing the goat door, she just says to you, “If
+there’s a car in one of the other doors and you don’t pick it, I’ll let you
+know.”</p>
+
+<p>It’s basically the same thing. You are going to be told which one of the two
+doors is a goat door, just not by opening it before you choose to switch.</p>
+
+<p>So while your original door still has 1/3rd odds of being correct, the other two
+doors, each having 1/3rd odds themselves, have basically fused into one. Just by
+switching, you fall into the other 2/3rds.</p>
+
+<h2 id="a-model-based-explanation">A model-based explanation</h2>
+
+<p>Let’s use <code class="highlighter-rouge">G</code> and <code class="highlighter-rouge">C</code> to represent cars and goats respectively.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G  G  C
+–  –  –
+</code></pre></div></div>
+
+<p>Below those doors, let’s use <code class="highlighter-rouge">S</code> for the door you would switch to and <code class="highlighter-rouge">O</code> for
+the door you originally chose.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G  G  C
+–  –  –
+   S  O
+</code></pre></div></div>
+
+<p>In the above example, you would have chosen the car but switched to the goat.</p>
+
+<p>Let’s establish one fact that will tie everything together, the door you switch
+to will always be the opposite of your choice.</p>
+
+<p>In every case, the doors will look like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G  
+–  –  –
+   S  O
+</code></pre></div></div>
+
+<p>Those last two doors are either <code class="highlighter-rouge">G</code> and <code class="highlighter-rouge">C</code> or <code class="highlighter-rouge">C</code> and <code class="highlighter-rouge">G</code>. There’s no other
+possible combination.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G  C  G
+–  –  –
+   S  O
+
+
+G  G  C
+–  –  –
+   S  O
+</code></pre></div></div>
+
+<p>Notice that the <code class="highlighter-rouge">S</code> door is always the opposite of <code class="highlighter-rouge">O</code>. Agreed? Let’s move on.</p>
+
+<p>You will pick the goat 2/3rds of the time.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      G
+–  –  –
+   S  O
+
+      G
+–  –  –
+   S  O
+
+      C
+–  –  –
+   S  O
+</code></pre></div></div>
+
+<p>The host will reveal a goat door 100% of the time.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G     G
+–  –  –
+   S  O
+
+G     G
+–  –  –
+   S  O
+
+G     C
+–  –  –
+   S  O
+</code></pre></div></div>
+
+<p>And we established that the switch door will always be the opposite of the
+original door.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>G  C  G
+–  –  –
+   S  O
+
+G  C  G
+–  –  –
+   S  O
+
+G  G  C
+–  –  –
+   S  O
+</code></pre></div></div>
+
+<p>Look down the third column and count how often you end up with the car by
+switching…2/3rds of the time. Beautiful, isn’t it?</p>
+:ET
