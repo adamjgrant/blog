@@ -1,4 +1,8 @@
 build:
+	@echo "Updating rubygems"
+	@gem update --system
+	@echo "Install dev tools"
+	#@xcode-select --install
 	@echo "Installing Jekyll"
 	@gem install jekyll
 	@echo "Updating Kickstart Submodule"

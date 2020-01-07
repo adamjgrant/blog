@@ -1,5 +1,6 @@
 # Setup
 
+- Make sure you're running ruby >= 2.4.0 (`rvm list`)
 - Run `make` and pray.
 
 # View blog
