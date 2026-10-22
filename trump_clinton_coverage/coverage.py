@@ -155,8 +155,33 @@ _rate_lock = threading.Lock()
 _last_req = [0.0]
 _pause_until = [0.0]       # global circuit breaker: all threads wait while the archive is unreachable
 _outage = {"since": None, "delay": 60}
-MIN_INTERVAL = 1.5         # seconds between requests across all threads
 MAX_OUTAGE_DELAY = 1800    # longest single wait while the archive is down
+
+# Adaptive politeness: the gap between requests (shared by all threads) doubles on
+# every rate-limit / dropped connection and shrinks 10% after each 20 clean requests,
+# never below MIN_INTERVAL. It settles at whatever pace the archive tolerates.
+MIN_INTERVAL = 6.0
+MAX_INTERVAL = 120.0
+_interval = [MIN_INTERVAL]
+_clean = [0]
+
+
+def _slow_down(reason):
+    with _rate_lock:
+        old = _interval[0]
+        _interval[0] = min(old * 2, MAX_INTERVAL)
+        _clean[0] = 0
+    if _interval[0] != old:
+        logging.warning("slowing down (%s): request gap %.0fs -> %.0fs", reason, old, _interval[0])
+
+
+def _speed_up():
+    with _rate_lock:
+        _clean[0] += 1
+        if _clean[0] >= 20 and _interval[0] > MIN_INTERVAL:
+            _interval[0] = max(_interval[0] * 0.9, MIN_INTERVAL)
+            _clean[0] = 0
+            logging.info("speeding up: request gap now %.1fs", _interval[0])
 
 
 def _session():
@@ -171,7 +196,8 @@ def _throttle():
     while True:
         with _rate_lock:
             now = time.monotonic()
-            wait = max(_last_req[0] + MIN_INTERVAL, _pause_until[0]) - now
+            gap = _interval[0] * random.uniform(0.8, 1.3)
+            wait = max(_last_req[0] + gap, _pause_until[0]) - now
             if wait <= 0:
                 _last_req[0] = now
                 return
@@ -216,16 +242,19 @@ def http_get(url, tries=6, timeout=60):
             r = _session().get(url, timeout=timeout, allow_redirects=True)
         except requests.RequestException as e:
             _local.__dict__.pop("s", None)   # fresh connection pool next time
+            _slow_down(type(e).__name__)
             _network_down(url, f"{type(e).__name__}: {e}")
             continue
         _network_up()
         if r.status_code == 200:
+            _speed_up()
             return r
         if r.status_code == 404:
             raise FetchError(f"404 {url}")
         attempt += 1
         last = f"HTTP {r.status_code}"
         if r.status_code in (429, 503):
+            _slow_down(f"HTTP {r.status_code}")
             with _rate_lock:
                 _pause_until[0] = max(_pause_until[0], time.monotonic() + 120 * attempt)
             logging.warning("%s from archive; pausing all workers %ds", r.status_code, 120 * attempt)
@@ -452,7 +481,7 @@ def main():
     ap.add_argument("--start", type=dt.date.fromisoformat, default=DEFAULT_START)
     ap.add_argument("--end", type=dt.date.fromisoformat, default=DEFAULT_END)
     ap.add_argument("--papers")
-    ap.add_argument("--workers", type=int, default=3)
+    ap.add_argument("--workers", type=int, default=1)
     args = ap.parse_args()
     DATA.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s",
