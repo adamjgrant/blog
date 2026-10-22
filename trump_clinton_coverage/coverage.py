@@ -153,7 +153,10 @@ def extract_headlines(html):
 _local = threading.local()
 _rate_lock = threading.Lock()
 _last_req = [0.0]
-MIN_INTERVAL = 1.0   # seconds between requests across all threads
+_pause_until = [0.0]       # global circuit breaker: all threads wait while the archive is unreachable
+_outage = {"since": None, "delay": 60}
+MIN_INTERVAL = 1.5         # seconds between requests across all threads
+MAX_OUTAGE_DELAY = 1800    # longest single wait while the archive is down
 
 
 def _session():
@@ -165,11 +168,37 @@ def _session():
 
 
 def _throttle():
+    while True:
+        with _rate_lock:
+            now = time.monotonic()
+            wait = max(_last_req[0] + MIN_INTERVAL, _pause_until[0]) - now
+            if wait <= 0:
+                _last_req[0] = now
+                return
+        time.sleep(min(wait, 30))
+
+
+def _network_down(url, err):
+    """Connection-level failure: pause everyone, back off, never give up."""
     with _rate_lock:
-        wait = _last_req[0] + MIN_INTERVAL - time.monotonic()
-        if wait > 0:
-            time.sleep(wait)
-        _last_req[0] = time.monotonic()
+        now = time.monotonic()
+        if _pause_until[0] > now:      # another thread already opened the breaker
+            return
+        if _outage["since"] is None:
+            _outage["since"] = dt.datetime.utcnow()
+            _outage["delay"] = 60
+        else:
+            _outage["delay"] = min(_outage["delay"] * 2, MAX_OUTAGE_DELAY)
+        _pause_until[0] = now + _outage["delay"]
+        logging.warning("ARCHIVE DOWN since %s (%s); pausing all workers %ds",
+                        _outage["since"].isoformat(timespec="seconds"), err[:120], _outage["delay"])
+
+
+def _network_up():
+    with _rate_lock:
+        if _outage["since"] is not None:
+            logging.warning("ARCHIVE BACK after outage since %s", _outage["since"].isoformat(timespec="seconds"))
+            _outage["since"] = None
 
 
 class FetchError(Exception):
@@ -177,44 +206,51 @@ class FetchError(Exception):
 
 
 def http_get(url, tries=6, timeout=60):
-    delay = 5
+    """HTTP errors are retried `tries` times; connection errors are retried forever."""
+    delay = 10
     last = None
-    for attempt in range(tries):
+    attempt = 0
+    while attempt < tries:
         _throttle()
         try:
             r = _session().get(url, timeout=timeout, allow_redirects=True)
-            if r.status_code == 200:
-                return r
-            if r.status_code == 404:
-                raise FetchError(f"404 {url}")
-            last = f"HTTP {r.status_code}"
-            if r.status_code == 429:
-                delay = max(delay, 60)
         except requests.RequestException as e:
-            last = f"{type(e).__name__}: {e}"
-        time.sleep(delay + random.random() * 2)
-        delay = min(delay * 2, 300)
+            _local.__dict__.pop("s", None)   # fresh connection pool next time
+            _network_down(url, f"{type(e).__name__}: {e}")
+            continue
+        _network_up()
+        if r.status_code == 200:
+            return r
+        if r.status_code == 404:
+            raise FetchError(f"404 {url}")
+        attempt += 1
+        last = f"HTTP {r.status_code}"
+        if r.status_code in (429, 503):
+            with _rate_lock:
+                _pause_until[0] = max(_pause_until[0], time.monotonic() + 120 * attempt)
+            logging.warning("%s from archive; pausing all workers %ds", r.status_code, 120 * attempt)
+        else:
+            time.sleep(delay + random.random() * 2)
+            delay = min(delay * 2, 300)
     raise FetchError(f"gave up after {tries} tries ({last}) {url}")
 
 
 def find_snapshot(domain, day):
-    """Return (timestamp, original_url) of the 200-status snapshot closest to target time."""
+    """Return (timestamp, url) of the snapshot closest to the target time, or None.
+
+    Uses the availability API on archive.org (more reliably reachable than the CDX server).
+    """
     target = dt.datetime(day.year, day.month, day.day, SNAPSHOT_HOUR_UTC)
-    lo = (target - MAX_SNAPSHOT_DRIFT).strftime("%Y%m%d%H%M%S")
-    hi = (target + MAX_SNAPSHOT_DRIFT).strftime("%Y%m%d%H%M%S")
-    url = ("https://web.archive.org/cdx/search/cdx?url=" + domain +
-           f"/&from={lo}&to={hi}&output=json&filter=statuscode:200"
-           "&filter=mimetype:text/html&fl=timestamp,original,length&collapse=timestamp:10")
-    rows = http_get(url).json()
-    if len(rows) <= 1:
+    url = (f"https://archive.org/wayback/available?url={domain}"
+           f"&timestamp={target.strftime('%Y%m%d%H%M%S')}")
+    closest = http_get(url).json().get("archived_snapshots", {}).get("closest")
+    if not closest or not closest.get("available") or closest.get("status") != "200":
         return None
-    best = None
-    for ts, orig, length in rows[1:]:
-        t = dt.datetime.strptime(ts, "%Y%m%d%H%M%S")
-        d = abs((t - target).total_seconds())
-        if best is None or d < best[0]:
-            best = (d, ts, orig)
-    return best[1], best[2]
+    ts = closest["timestamp"]
+    if abs(dt.datetime.strptime(ts, "%Y%m%d%H%M%S") - target) > MAX_SNAPSHOT_DRIFT:
+        return None
+    orig = closest["url"].split(f"/web/{ts}/", 1)[1]
+    return ts, orig
 
 
 def fetch_html(ts, orig):
