@@ -56,6 +56,7 @@ SNAPSHOT_HOUR_UTC = 14     # ~10am Eastern
 TOP_PX = 1200              # "top stories": roughly the first screen at 1024px width
 OCR_DEPTH = 4000
 MIN_LINES = 25             # fewer OCR lines than this => blank / broken capture
+MIN_TOP_LINES = 20         # ...or fewer than this in the top region (e.g. page rendered without CSS)
 MAX_TRIES_PER_DAY = 4
 
 # US newspapers PastPages tracked through the whole 2016 window.
@@ -74,10 +75,29 @@ PAPERS = {
     "missourian":              "Columbia Missourian",
 }
 
+# Secondary group: US broadcast / online outlets, reported separately.
+OUTLETS = {
+    "cnn":           "CNN",
+    "fox-news":      "Fox News",
+    "npr":           "NPR",
+    "drudge-report": "Drudge Report",
+    "bloomberg":     "Bloomberg",
+    "tpm":           "Talking Points Memo",
+}
+
+# group -> (sites, daily csv, summary md, heading)
+GROUPS = {
+    "newspapers": (PAPERS, "pastpages_daily.csv", "pastpages_summary.md", "US newspaper front pages"),
+    "outlets": (OUTLETS, "pastpages_outlets_daily.csv", "pastpages_outlets_summary.md",
+                "US broadcast / online news homepages"),
+}
+NAMES = {**PAPERS, **OUTLETS}
+
 # --- mention detection (tolerant of OCR dropping spaces) -----------------------
 TRUMP_FAMILY = re.compile(r"(Melania|[Il]?vanka|Eric|Tiffany|Barron|Lara)\s*Trump|Trump,?\s*Jr|Donald\s*Trump\s*Jr", re.I)
 TRUMP = re.compile(r"Trump(?![a-z])|TRUMP")
 CLINTON_FAMILY = re.compile(r"(Bill|Chelsea)\s*Clinton", re.I)
+AD_LINE = re.compile(r"paid\s*for\s*by|advertisement|sponsored", re.I)   # campaign ads aren't coverage
 CLINTON = re.compile(r"Hillary|HILLARY|Clinton(?![a-z])|CLINTON|\bHRC\b")
 
 
@@ -122,8 +142,10 @@ def ocr_lines(img_bytes):
 # --- index of captures ---------------------------------------------------------------
 def build_index(args):
     if INDEX.exists() and not args.refresh:
-        return json.loads(INDEX.read_text())
-    slugs = " OR ".join(PAPERS)
+        idx = json.loads(INDEX.read_text())
+        if all(s in idx for s in NAMES):
+            return idx
+    slugs = " OR ".join(NAMES)
     q = (f"collection:pastpages AND pastpages_site_slug:({slugs}) AND "
          f"date:[{DEFAULT_START}T00:00:00Z TO {DEFAULT_END + dt.timedelta(days=1)}T12:00:00Z]")
     params = {"q": q, "fields": "identifier,pastpages_site_slug,date", "count": 10000}
@@ -178,12 +200,17 @@ def fetch_screenshot(ident):
     return wb.http_get(f"https://archive.org/download/{ident}/{names[0]}", timeout=180).content
 
 
+def good_capture(lines):
+    return len(lines) >= MIN_LINES and sum(l["y"] < TOP_PX for l in lines) >= MIN_TOP_LINES
+
+
 def score(rec):
-    lines = rec.get("lines", [])
+    all_lines = rec.get("lines", [])
+    lines = [l for l in all_lines if not AD_LINE.search(l["t"])]
     top = " \n".join(l["t"] for l in lines if l["y"] < TOP_PX)
     deep = " \n".join(l["t"] for l in lines)
     rec.update({
-        "usable": len(lines) >= MIN_LINES,
+        "usable": good_capture(all_lines),
         "top_trump": mentions_trump(top), "top_clinton": mentions_clinton(top),
         "deep_trump": mentions_trump(deep), "deep_clinton": mentions_clinton(deep),
         "top_trump_lines": sum(mentions_trump(l["t"]) for l in lines if l["y"] < TOP_PX),
@@ -204,7 +231,7 @@ def process(slug, day, caps):
             o = ocr_lines(img)
             rec.update(capture=ident, captured_at=ts, width=o["width"], height=o["height"], lines=o["lines"])
             rec["tried"].append([ident, len(o["lines"])])
-            if len(o["lines"]) >= MIN_LINES:
+            if good_capture(o["lines"]):
                 break
         score(rec)
         out.parent.mkdir(parents=True, exist_ok=True)
@@ -227,14 +254,14 @@ def daterange(a, b):
 # --- commands ---------------------------------------------------------------------------
 def cmd_index(args):
     idx = build_index(args)
-    for slug in PAPERS:
+    for slug in NAMES:
         days = {c[0][:10] for c in idx.get(slug, [])}
         logging.info("%-25s %5d captures on %3d days", slug, len(idx.get(slug, [])), len(days))
 
 
 def cmd_run(args):
     idx = build_index(args)
-    papers = args.papers.split(",") if args.papers else list(PAPERS)
+    papers = args.papers.split(",") if args.papers else list(GROUPS[args.group][0])
     days = list(daterange(args.start, args.end))
     todo = [(s, d) for d in days for s in papers if not ocr_path(s, d).exists()]
     logging.info("run: %d papers x %d days, %d to do", len(papers), len(days), len(todo))
@@ -274,6 +301,11 @@ def cmd_rescore(args):
 
 def cmd_report(args):
     recs = [r for r in load_recs() if r.get("usable")]
+    for group, (sites, csv_name, md_name, heading) in GROUPS.items():
+        report_group([r for r in recs if r["paper"] in sites], sites, csv_name, md_name, heading)
+
+
+def report_group(recs, sites, csv_name, md_name, heading):
     by_day = defaultdict(list)
     for r in recs:
         by_day[r["date"]].append(r)
@@ -289,9 +321,9 @@ def cmd_report(args):
             day, len(rows), pct(rows, "top_trump"), pct(rows, "top_clinton"),
             pct(rows, "deep_trump"), pct(rows, "deep_clinton"),
             sum(r["top_trump_lines"] for r in rows), sum(r["top_clinton_lines"] for r in rows)]))
-    (ROOT / "pastpages_daily.csv").write_text("\n".join(lines) + "\n")
+    (ROOT / csv_name).write_text("\n".join(lines) + "\n")
 
-    summ = ["# Trump vs. Clinton on US newspaper front pages (PastPages screenshots)", "",
+    summ = [f"# Trump vs. Clinton on {heading} (PastPages screenshots)", "",
             f"Window {DEFAULT_START} - {DEFAULT_END}. One capture per paper per day, nearest "
             f"{SNAPSHOT_HOUR_UTC}:00 UTC (~10am ET). \"Top\" = text OCR'd in the first {TOP_PX}px of the "
             f"homepage (≈ first screen); \"deep\" = first {OCR_DEPTH}px.", ""]
@@ -310,10 +342,10 @@ def cmd_report(args):
         by_paper = defaultdict(list)
         for r in recs:
             by_paper[r["paper"]].append(r)
-        for s in PAPERS:
+        for s in sites:
             v = by_paper.get(s, [])
             if v:
-                summ.append(f"| {PAPERS[s]} | {len(v)} | {pct(v, 'top_trump')} | {pct(v, 'top_clinton')} |")
+                summ.append(f"| {sites[s]} | {len(v)} | {pct(v, 'top_trump')} | {pct(v, 'top_clinton')} |")
         # monthly
         by_month = defaultdict(list)
         for d, v in by_day.items():
@@ -322,17 +354,20 @@ def cmd_report(args):
         for m in sorted(by_month):
             v = by_month[m]
             summ.append(f"| {m} | {sum(a for a, _ in v) / len(v):.1f} | {sum(b for _, b in v) / len(v):.1f} |")
-    (ROOT / "pastpages_summary.md").write_text("\n".join(summ) + "\n")
-    logging.info("report: %d usable paper-days over %d days", len(recs), len(by_day))
+    (ROOT / md_name).write_text("\n".join(summ) + "\n")
+    logging.info("report %s: %d usable paper-days over %d days", md_name, len(recs), len(by_day))
 
 
 def cmd_status(args):
-    recs = load_recs()
-    total = len(PAPERS) * len(list(daterange(DEFAULT_START, DEFAULT_END)))
-    usable = sum(1 for r in recs if r.get("usable"))
+    all_recs = load_recs()
+    ndays = len(list(daterange(DEFAULT_START, DEFAULT_END)))
+    for group, (sites, *_) in GROUPS.items():
+        recs = [r for r in all_recs if r["paper"] in sites]
+        usable = sum(1 for r in recs if r.get("usable"))
+        print(f"{group:11s} done {len(recs)}/{len(sites) * ndays}  usable {usable}  "
+              f"no-capture {sum(1 for r in recs if not r.get('capture'))}")
     errs = sum(1 for _ in open(ERRORS)) if ERRORS.exists() else 0
-    print(f"done {len(recs)}/{total}  usable {usable}  no-capture {sum(1 for r in recs if not r.get('capture'))}  "
-          f"error-log lines {errs}")
+    print(f"error-log lines {errs}")
 
 
 def main():
@@ -341,6 +376,7 @@ def main():
     ap.add_argument("--start", type=dt.date.fromisoformat, default=DEFAULT_START)
     ap.add_argument("--end", type=dt.date.fromisoformat, default=DEFAULT_END)
     ap.add_argument("--papers")
+    ap.add_argument("--group", choices=list(GROUPS), default="newspapers")
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--refresh", action="store_true", help="rebuild the capture index")
     args = ap.parse_args()
