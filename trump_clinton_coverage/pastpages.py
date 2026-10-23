@@ -49,6 +49,7 @@ OCR_DIR = DATA / "ocr"
 ERRORS = DATA / "errors.jsonl"
 LOG = DATA / "run.log"
 INDEX = DATA / "index.json"
+INTERIM = DATA / "interim"
 
 DEFAULT_START = dt.date(2016, 5, 8)
 DEFAULT_END = dt.date(2016, 11, 7)
@@ -292,7 +293,7 @@ def cmd_run(args):
                 logging.info("PROGRESS %d/%d %s  %.1f items/min  ETA %.1f h",
                              i, len(todo), dict(counts), rate * 60, (len(todo) - i) / rate / 3600)
             if i % 50 == 0:
-                cmd_report(args)
+                cmd_report(args, out_dir=INTERIM)
     cmd_report(args)
     logging.info("DONE %s", dict(counts))
 
@@ -311,13 +312,15 @@ def cmd_rescore(args):
     cmd_report(args)
 
 
-def cmd_report(args):
+def cmd_report(args, out_dir=ROOT):
+    """Interim reports during a run go to data_pastpages/interim (untracked); final ones to ROOT."""
+    out_dir.mkdir(parents=True, exist_ok=True)
     recs = [r for r in load_recs() if r.get("usable")]
     for group, (sites, csv_name, md_name, heading) in GROUPS.items():
-        report_group([r for r in recs if r["paper"] in sites], sites, csv_name, md_name, heading)
+        report_group([r for r in recs if r["paper"] in sites], sites, out_dir / csv_name, out_dir / md_name, heading)
 
 
-def report_group(recs, sites, csv_name, md_name, heading):
+def report_group(recs, sites, csv_path, md_path, heading):
     by_day = defaultdict(list)
     for r in recs:
         by_day[r["date"]].append(r)
@@ -333,7 +336,7 @@ def report_group(recs, sites, csv_name, md_name, heading):
             day, len(rows), pct(rows, "top_trump"), pct(rows, "top_clinton"),
             pct(rows, "deep_trump"), pct(rows, "deep_clinton"),
             sum(r["top_trump_lines"] for r in rows), sum(r["top_clinton_lines"] for r in rows)]))
-    (ROOT / csv_name).write_text("\n".join(lines) + "\n")
+    csv_path.write_text("\n".join(lines) + "\n")
 
     summ = [f"# Trump vs. Clinton on {heading} (PastPages screenshots)", "",
             f"Window {DEFAULT_START} - {DEFAULT_END}. One capture per paper per day, nearest "
@@ -366,8 +369,8 @@ def report_group(recs, sites, csv_name, md_name, heading):
         for m in sorted(by_month):
             v = by_month[m]
             summ.append(f"| {m} | {sum(a for a, _ in v) / len(v):.1f} | {sum(b for _, b in v) / len(v):.1f} |")
-    (ROOT / md_name).write_text("\n".join(summ) + "\n")
-    logging.info("report %s: %d usable paper-days over %d days", md_name, len(recs), len(by_day))
+    md_path.write_text("\n".join(summ) + "\n")
+    logging.info("report %s: %d usable paper-days over %d days", md_path, len(recs), len(by_day))
 
 
 def cmd_status(args):
