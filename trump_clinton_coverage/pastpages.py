@@ -77,10 +77,10 @@ PAPERS = {
 }
 
 # Secondary group: US broadcast / online outlets, reported separately.
+# (NPR dropped: its PastPages captures for 2016 render without CSS, so no headlines are readable.)
 OUTLETS = {
     "cnn":           "CNN",
     "fox-news":      "Fox News",
-    "npr":           "NPR",
     "drudge-report": "Drudge Report",
     "bloomberg":     "Bloomberg",
     "tpm":           "Talking Points Memo",
