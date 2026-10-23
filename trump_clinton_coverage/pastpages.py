@@ -118,6 +118,28 @@ def mentions_clinton(text):
     return bool(CLINTON.search(CLINTON_FAMILY.sub(" ", text)))
 
 
+def _pos(text, family, pat):
+    blanked = family.sub(lambda m: " " * len(m.group(0)), text)   # keep offsets
+    m = pat.search(blanked)
+    return m.start() if m else None
+
+
+def first_mention(lines):
+    """('trump'|'clinton', y) for the candidate named first reading down the page, or ('', None).
+
+    Lines are in page order (top to bottom, then left to right); when one line names
+    both, the one earlier in the line wins.
+    """
+    for l in lines:
+        t, c = _pos(l["t"], TRUMP_FAMILY, TRUMP), _pos(l["t"], CLINTON_FAMILY, CLINTON)
+        if t is None and c is None:
+            continue
+        if c is None or (t is not None and t < c):
+            return "trump", l["y"]
+        return "clinton", l["y"]
+    return "", None
+
+
 # --- OCR ---------------------------------------------------------------------------
 _ocr_local = threading.local()
 
@@ -225,6 +247,7 @@ def score(rec):
         "top_trump_lines": sum(mentions_trump(l["t"]) for l in lines if l["y"] < TOP_PX),
         "top_clinton_lines": sum(mentions_clinton(l["t"]) for l in lines if l["y"] < TOP_PX),
     })
+    rec["first"], rec["first_y"] = first_mention(lines)
     return rec
 
 
@@ -329,13 +352,14 @@ def report_group(recs, sites, csv_path, md_path, heading):
         return round(100 * sum(r[f] for r in rows) / len(rows), 1) if rows else 0.0
 
     lines = ["date,papers_checked,pct_top_trump,pct_top_clinton,pct_deep_trump,pct_deep_clinton,"
-             "top_trump_lines,top_clinton_lines"]
+             "top_trump_lines,top_clinton_lines,first_trump,first_clinton"]
     for day in sorted(by_day):
         rows = by_day[day]
         lines.append(",".join(str(x) for x in [
             day, len(rows), pct(rows, "top_trump"), pct(rows, "top_clinton"),
             pct(rows, "deep_trump"), pct(rows, "deep_clinton"),
-            sum(r["top_trump_lines"] for r in rows), sum(r["top_clinton_lines"] for r in rows)]))
+            sum(r["top_trump_lines"] for r in rows), sum(r["top_clinton_lines"] for r in rows),
+            sum(r.get("first") == "trump" for r in rows), sum(r.get("first") == "clinton" for r in rows)]))
     csv_path.write_text("\n".join(lines) + "\n")
 
     summ = [f"# Trump vs. Clinton on {heading} (PastPages screenshots)", "",
@@ -352,23 +376,40 @@ def report_group(recs, sites, csv_path, md_path, heading):
                  f"- Mean daily % of papers with **Trump** in top stories: **{mean(0):.1f}%**",
                  f"- Mean daily % of papers with **Clinton** in top stories: **{mean(1):.1f}%**",
                  f"- Days Trump % > Clinton %: {tw}; Clinton > Trump: {cw}; tied: {len(dp) - tw - cw}",
-                 f"- Deeper ({OCR_DEPTH}px) - Trump {mean(2):.1f}% vs Clinton {mean(3):.1f}%",
-                 "", "| paper | days | % days Trump on top | % days Clinton on top |", "|---|---|---|---|"]
+                 f"- Deeper ({OCR_DEPTH}px) - Trump {mean(2):.1f}% vs Clinton {mean(3):.1f}%"]
+        named = [r for r in recs if r.get("first")]
+        ft = sum(r["first"] == "trump" for r in named)
+        fdays = [(sum(r.get("first") == "trump" for r in v), sum(r.get("first") == "clinton" for r in v))
+                 for v in by_day.values()]
+        if named:
+            summ += [f"- **Named first** (reading down the page, of {len(named)} front pages naming either): "
+                     f"Trump **{100 * ft / len(named):.1f}%**, Clinton **{100 * (len(named) - ft) / len(named):.1f}%**; "
+                     f"days more papers named Trump first: {sum(a > b for a, b in fdays)}, "
+                     f"Clinton first: {sum(b > a for a, b in fdays)}, tied: {sum(a == b for a, b in fdays)}"]
+        summ += ["", "| paper | days | % days Trump on top | % days Clinton on top | Trump named first | Clinton named first |",
+                 "|---|---|---|---|---|---|"]
         by_paper = defaultdict(list)
         for r in recs:
             by_paper[r["paper"]].append(r)
         for s in sites:
             v = by_paper.get(s, [])
             if v:
-                summ.append(f"| {sites[s]} | {len(v)} | {pct(v, 'top_trump')} | {pct(v, 'top_clinton')} |")
+                nf = sum(1 for r in v if r.get("first"))
+                ftp = round(100 * sum(r.get("first") == "trump" for r in v) / nf, 1) if nf else ""
+                fcp = round(100 - ftp, 1) if nf else ""
+                summ.append(f"| {sites[s]} | {len(v)} | {pct(v, 'top_trump')} | {pct(v, 'top_clinton')} | {ftp}% | {fcp}% |")
         # monthly
         by_month = defaultdict(list)
         for d, v in by_day.items():
-            by_month[d[:7]].append((pct(v, "top_trump"), pct(v, "top_clinton")))
-        summ += ["", "| month | mean % Trump | mean % Clinton |", "|---|---|---|"]
+            by_month[d[:7]].append((pct(v, "top_trump"), pct(v, "top_clinton"),
+                                    sum(r.get("first") == "trump" for r in v), sum(r.get("first") == "clinton" for r in v)))
+        summ += ["", "| month | mean % Trump on top | mean % Clinton on top | Trump named first | Clinton named first |",
+                 "|---|---|---|---|---|"]
         for m in sorted(by_month):
             v = by_month[m]
-            summ.append(f"| {m} | {sum(a for a, _ in v) / len(v):.1f} | {sum(b for _, b in v) / len(v):.1f} |")
+            ft_m, fc_m = sum(x[2] for x in v), sum(x[3] for x in v)
+            share = f"{100 * ft_m / (ft_m + fc_m):.0f}% | {100 * fc_m / (ft_m + fc_m):.0f}%" if ft_m + fc_m else " | "
+            summ.append(f"| {m} | {sum(x[0] for x in v) / len(v):.1f} | {sum(x[1] for x in v) / len(v):.1f} | {share} |")
     md_path.write_text("\n".join(summ) + "\n")
     logging.info("report %s: %d usable paper-days over %d days", md_path, len(recs), len(by_day))
 

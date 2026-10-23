@@ -7,15 +7,16 @@ Window 2016-05-08 - 2016-11-07. One capture per paper per day, nearest 14:00 UTC
 - Mean daily % of papers with **Clinton** in top stories: **80.0%**
 - Days Trump % > Clinton %: 0; Clinton > Trump: 0; tied: 1
 - Deeper (4000px) - Trump 100.0% vs Clinton 100.0%
+- **Named first** (reading down the page, of 5 front pages naming either): Trump **80.0%**, Clinton **20.0%**; days more papers named Trump first: 1, Clinton first: 0, tied: 0
 
-| paper | days | % days Trump on top | % days Clinton on top |
-|---|---|---|---|
-| CNN | 1 | 100.0 | 100.0 |
-| Fox News | 1 | 100.0 | 100.0 |
-| Drudge Report | 1 | 100.0 | 100.0 |
-| Bloomberg | 1 | 0.0 | 0.0 |
-| Talking Points Memo | 1 | 100.0 | 100.0 |
+| paper | days | % days Trump on top | % days Clinton on top | Trump named first | Clinton named first |
+|---|---|---|---|---|---|
+| CNN | 1 | 100.0 | 100.0 | 0.0% | 100.0% |
+| Fox News | 1 | 100.0 | 100.0 | 100.0% | 0.0% |
+| Drudge Report | 1 | 100.0 | 100.0 | 100.0% | 0.0% |
+| Bloomberg | 1 | 0.0 | 0.0 | 100.0% | 0.0% |
+| Talking Points Memo | 1 | 100.0 | 100.0 | 100.0% | 0.0% |
 
-| month | mean % Trump | mean % Clinton |
-|---|---|---|
-| 2016-09 | 80.0 | 80.0 |
+| month | mean % Trump on top | mean % Clinton on top | Trump named first | Clinton named first |
+|---|---|---|---|---|
+| 2016-09 | 80.0 | 80.0 | 80% | 20% |

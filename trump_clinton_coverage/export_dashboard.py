@@ -19,7 +19,8 @@ def main():
         rows.append({"date": r["date"], "paper": r["paper"], "name": pp.NAMES[r["paper"]],
                      "group": group_of[r["paper"]],
                      "top_trump": int(r["top_trump"]), "top_clinton": int(r["top_clinton"]),
-                     "deep_trump": int(r["deep_trump"]), "deep_clinton": int(r["deep_clinton"])})
+                     "deep_trump": int(r["deep_trump"]), "deep_clinton": int(r["deep_clinton"]),
+                     "first": r.get("first", "")})
     rows.sort(key=lambda x: (x["date"], x["paper"]))
     with open(OUT / "paper_days.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0]) if rows else ["date"])
