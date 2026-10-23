@@ -105,7 +105,9 @@ NAMES = {**PAPERS, **OUTLETS, **INTL}
 # --- mention detection (tolerant of OCR dropping spaces) -----------------------
 TRUMP_FAMILY = re.compile(r"(Melania|[Il]?vanka|Eric|Tiffany|Barron|Lara)\s*Trump|Trump,?\s*Jr|Donald\s*Trump\s*Jr", re.I)
 TRUMP = re.compile(r"Trump(?![a-z])|TRUMP")
-CLINTON_FAMILY = re.compile(r"(Bill|Chelsea)\s*Clinton", re.I)
+# Family members, plus Clinton the place (Clinton, Iowa / Missouri; the Clinton LumberKings play the Cedar Rapids Kernels)
+CLINTON_FAMILY = re.compile(r"(Bill|Chelsea)\s*Clinton|Clinton\s*(County|Lumber\s*Kings|High|Township|Community|Lake|Iowa|Mo\b)"
+                            r"|Clinton,\s*(Iowa|Mo)|Kernels.*Clinton|Clinton.*Kernels", re.I)
 AD_LINE = re.compile(r"paid\s*for\s*by|advertisement|sponsored", re.I)   # campaign ads aren't coverage
 CLINTON = re.compile(r"Hillary|HILLARY|Clinton(?![a-z])|CLINTON|\bHRC\b")
 
@@ -116,6 +118,17 @@ def mentions_trump(text):
 
 def mentions_clinton(text):
     return bool(CLINTON.search(CLINTON_FAMILY.sub(" ", text)))
+
+
+# Papers near a town called Clinton (local sports): a bare "Clinton" needs campaign context on the same line.
+CLINTON_TOWN_PAPERS = {"cedar-rapids-gazette"}
+CAMPAIGN_CONTEXT = re.compile(r"Hillary|Trump|campaign|Dem|GOP|president|email|poll|vot|elect|nominee|Kaine|Pence", re.I)
+
+
+def _local_fix(paper, text):
+    if paper in CLINTON_TOWN_PAPERS and not CAMPAIGN_CONTEXT.search(text):
+        return re.sub(r"Clinton", "", text)
+    return text
 
 
 def _pos(text, family, pat):
@@ -237,7 +250,7 @@ def good_capture(lines):
 
 def score(rec):
     all_lines = rec.get("lines", [])
-    lines = [l for l in all_lines if not AD_LINE.search(l["t"])]
+    lines = [{**l, "t": _local_fix(rec.get("paper"), l["t"])} for l in all_lines if not AD_LINE.search(l["t"])]
     top = " \n".join(l["t"] for l in lines if l["y"] < TOP_PX)
     deep = " \n".join(l["t"] for l in lines)
     rec.update({
