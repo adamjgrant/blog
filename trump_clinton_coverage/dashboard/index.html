@@ -67,7 +67,7 @@
     <div class="tc-tile clinton"><span class="k">Avg. share of papers with Clinton in top stories</span><span class="v dash-skeleton" data-source="summary" data-field="clinton_avg">—</span></div>
     <div class="tc-tile trump"><span class="k">Front pages that named Trump before Clinton</span><span class="v dash-skeleton" data-source="summary" data-field="trump_first_share">—</span></div>
     <div class="tc-tile"><span class="k">Days Trump led / Clinton led</span><span class="v dash-skeleton" data-source="summary" data-field="days_split">—</span></div>
-    <div class="tc-tile"><span class="k">Front pages read so far</span><span class="v dash-skeleton" data-source="summary" data-field="paper_days">—</span></div>
+    <div class="tc-tile"><span class="k">Front pages read</span><span class="v dash-skeleton" data-source="summary" data-field="paper_days">—</span></div>
   </section>
 
   <section class="tc-card" id="daily-chart">
@@ -100,7 +100,7 @@
     </div>
   </section>
 
-  <p class="tc-note" id="method">Source: PastPages homepage screenshots (pastpages.org, archived on archive.org), read with OCR. One capture per publication per day, nearest 10am Eastern, May 8 – Nov 7, 2016. "Top stories" is any text in the first 1,200 pixels of the page. Mentions of Melania, Ivanka, Bill or Chelsea, and paid ads, are not counted. The New York Times and Washington Post are not in the archive for this period.</p>
+  <p class="tc-note" id="method">Source: PastPages homepage screenshots (pastpages.org, archived on archive.org), read with OCR. One capture per publication per day, nearest 10am Eastern, May 8 – Nov 7, 2016. "Top stories" is any text in the first 1,200 pixels of the page. Mentions of Melania, Ivanka, Bill or Chelsea, and paid ads, are not counted. The New York Times and Washington Post are not in the archive for this period. NPR was dropped because its 2016 captures rendered without styling; the Denver Post and philly.com have fewer usable days for the same reason, and a capture without enough readable text is left out rather than counted as "no mention".</p>
 </div>
 
 <script>
@@ -202,7 +202,7 @@ function drawHeader(group) {
   tk.classList.remove('dash-skeleton');
   if (!row) {
     tiles.forEach(el => { el.textContent = '—'; });
-    tk.textContent = 'No front pages from this group have been read yet. They are queued after the US newspapers.';
+    tk.textContent = 'No front pages from this group could be read.';
     return;
   }
   for (const el of tiles) {
@@ -213,7 +213,7 @@ function drawHeader(group) {
   tk.textContent = '';
   const lead = row.trump_avg >= row.clinton_avg;
   const add = (txt, cls) => { const e = document.createElement(cls ? 'b' : 'span'); if (cls) e.className = cls; e.textContent = txt; tk.appendChild(e); };
-  add('On an average day so far, ');
+  add('On an average day, ');
   add(pct(row.trump_avg) + ' of ' + groupNoun[group], 't');
   add(' had Trump in their top stories, against ');
   add(pct(row.clinton_avg), 'c');
@@ -224,7 +224,7 @@ function drawHeader(group) {
     add((tf ? 'Trump' : 'Clinton') + ' was named first ' + pct(tf ? row.trump_first_share : 1 - row.trump_first_share) + ' of the time', tf ? 't' : 'c');
     add('. ');
   }
-  add('Data is still coming in, so these numbers will move.');
+  add('Final results, ' + d3.format(',')(row.paper_days) + ' front pages read.');
 }
 
 function drawMonths(group) {
@@ -309,7 +309,7 @@ function drawChart(group) {
   }
   if (!rows.length) {
     svg.append('text').attr('x', (m.left + W - m.right) / 2).attr('y', H / 2).attr('text-anchor', 'middle')
-      .attr('font-size', 12).attr('fill', muted).text('Not read yet: queued after the US newspapers');
+      .attr('font-size', 12).attr('fill', muted).text('No front pages read for this group');
     return;
   }
   // tooltip
