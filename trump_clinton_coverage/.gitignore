@@ -1,3 +1,4 @@
 data/
 data_pastpages/
 __pycache__/
+dashboard/paper_days.csv
