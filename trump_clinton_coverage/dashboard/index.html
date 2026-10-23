@@ -36,6 +36,15 @@
   .tc-bar { display: flex; align-items: center; gap: var(--cds-gap-xs); min-width: 7rem; }
   .tc-bar b { display: block; height: 6px; border-radius: 3px; }
   .tc-bar.t b { background: var(--trump); } .tc-bar.c b { background: var(--clinton); }
+  .tc-months { display: grid; gap: var(--cds-gap-sm); min-height: 12rem; }
+  .tc-month { display: grid; grid-template-columns: 5.5rem 1fr 4.5rem; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .tc-month .m { color: var(--color-fg-muted); }
+  .tc-month .n { color: var(--color-fg-muted); text-align: right; }
+  .tc-split { display: flex; height: 1.5rem; border-radius: 4px; overflow: hidden; gap: 2px; }
+  .tc-split > div { flex-basis: 0; min-width: 0; display: flex; align-items: center; padding: 0 var(--cds-pad-xs); color: var(--color-bg); white-space: nowrap; overflow: hidden; }
+  .tc-split .t { background: var(--trump); }
+  .tc-split .c { background: var(--clinton); justify-content: flex-end; }
+  @media (max-width: 30rem) { .tc-month { grid-template-columns: 4.5rem 1fr; } .tc-month .n { display: none; } }
   [data-dash-source-state=empty] { color: transparent; }
   [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
   .tc-fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); min-height: 320px; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
@@ -56,6 +65,7 @@
   <section class="tc-tiles" id="tiles">
     <div class="tc-tile trump"><span class="k">Avg. share of papers with Trump in top stories</span><span class="v dash-skeleton" data-source="summary" data-field="trump_avg">—</span></div>
     <div class="tc-tile clinton"><span class="k">Avg. share of papers with Clinton in top stories</span><span class="v dash-skeleton" data-source="summary" data-field="clinton_avg">—</span></div>
+    <div class="tc-tile trump"><span class="k">Front pages that named Trump before Clinton</span><span class="v dash-skeleton" data-source="summary" data-field="trump_first_share">—</span></div>
     <div class="tc-tile"><span class="k">Days Trump led / Clinton led</span><span class="v dash-skeleton" data-source="summary" data-field="days_split">—</span></div>
     <div class="tc-tile"><span class="k">Front pages read so far</span><span class="v dash-skeleton" data-source="summary" data-field="paper_days">—</span></div>
   </section>
@@ -65,6 +75,12 @@
     <p class="tc-note">Each point is one day: the share of papers whose top stories (roughly the first screen of the homepage, around 10am Eastern) mention the candidate. Gaps are days not yet processed or not captured.</p>
     <div class="tc-legend"><span class="t">Trump</span><span class="c">Clinton</span></div>
     <div class="tc-chart dash-skeleton" id="chart" data-source="daily events"></div>
+  </section>
+
+  <section class="tc-card" id="named-first">
+    <h2>Who a reader meets first, by month</h2>
+    <p class="tc-note">Of front pages that mention either candidate, the share where Trump is named before Clinton reading down the page.</p>
+    <div class="tc-months dash-skeleton" id="months" data-source="monthly_first"></div>
   </section>
 
   <section class="tc-card" id="by-paper">
@@ -77,6 +93,7 @@
           <th data-field="days" class="num">Days</th>
           <th data-field="trump_share">Trump on top</th>
           <th data-field="clinton_share">Clinton on top</th>
+          <th data-field="trump_first_share" class="num">Trump named first</th>
         </tr></thead>
         <tbody id="paper-rows"></tbody>
       </table>
@@ -104,19 +121,41 @@ dash.calc('daily', {
 });
 
 dash.calc('summary', {
-  inputs: ['daily'],
+  inputs: ['daily', 'paper_days'],
   title: 'Headline figures',
-  description: 'Per group: mean of the daily shares, days each candidate led, front pages read.',
-  fn: (daily) => {
+  description: 'Per group: mean of the daily shares, days each candidate led, front pages read, and which candidate was named first.',
+  fn: (daily, paper_days) => {
     const g = new Map();
     for (const d of daily) {
-      const o = g.get(d.group) || { group: d.group, days: 0, ts: 0, cs: 0, tl: 0, cl: 0, pd: 0 };
+      const o = g.get(d.group) || { group: d.group, days: 0, ts: 0, cs: 0, tl: 0, cl: 0, pd: 0, ft: 0, fc: 0 };
       o.days += 1; o.ts += d.trump_pct; o.cs += d.clinton_pct; o.pd += d.papers;
       if (d.trump_pct > d.clinton_pct) o.tl += 1; else if (d.clinton_pct > d.trump_pct) o.cl += 1;
       g.set(d.group, o);
     }
+    for (const r of paper_days) {
+      const o = g.get(r.group);
+      if (r.first === 'trump') o.ft += 1; else if (r.first === 'clinton') o.fc += 1;
+    }
     return [...g.values()].map(o => ({ group: o.group, days: o.days, trump_avg: o.ts / o.days, clinton_avg: o.cs / o.days,
-      trump_led: o.tl, clinton_led: o.cl, days_split: o.tl + ' / ' + o.cl, paper_days: o.pd }));
+      trump_led: o.tl, clinton_led: o.cl, days_split: o.tl + ' / ' + o.cl, paper_days: o.pd,
+      named_either: o.ft + o.fc, trump_first_share: o.ft + o.fc ? o.ft / (o.ft + o.fc) : null }));
+  }
+});
+
+dash.calc('monthly_first', {
+  inputs: ['paper_days'],
+  title: 'Named first, by month',
+  description: 'Per group and month: of front pages naming either candidate, how many named Trump first and how many Clinton.',
+  fn: (paper_days) => {
+    const m = new Map();
+    for (const r of paper_days) {
+      if (r.first !== 'trump' && r.first !== 'clinton') continue;
+      const k = r.group + '|' + r.date.slice(0, 7);
+      const o = m.get(k) || { group: r.group, month: r.date.slice(0, 7), trump_first: 0, clinton_first: 0 };
+      if (r.first === 'trump') o.trump_first += 1; else o.clinton_first += 1;
+      m.set(k, o);
+    }
+    return [...m.values()].map(o => ({ ...o, trump_first_share: o.trump_first / (o.trump_first + o.clinton_first) }));
   }
 });
 
@@ -127,11 +166,13 @@ dash.calc('by_paper', {
   fn: (paper_days) => {
     const m = new Map();
     for (const r of paper_days) {
-      const o = m.get(r.name) || { name: r.name, group: r.group, days: 0, t: 0, c: 0 };
+      const o = m.get(r.name) || { name: r.name, group: r.group, days: 0, t: 0, c: 0, ft: 0, fc: 0 };
       o.days += 1; o.t += Number(r.top_trump); o.c += Number(r.top_clinton);
+      if (r.first === 'trump') o.ft += 1; else if (r.first === 'clinton') o.fc += 1;
       m.set(r.name, o);
     }
-    return [...m.values()].map(o => ({ name: o.name, group: o.group, days: o.days, trump_share: o.t / o.days, clinton_share: o.c / o.days }));
+    return [...m.values()].map(o => ({ name: o.name, group: o.group, days: o.days, trump_share: o.t / o.days, clinton_share: o.c / o.days,
+      trump_first_share: o.ft + o.fc ? o.ft / (o.ft + o.fc) : null }));
   }
 });
 
@@ -166,7 +207,8 @@ function drawHeader(group) {
   }
   for (const el of tiles) {
     const f = el.dataset.field;
-    el.textContent = f === 'trump_avg' || f === 'clinton_avg' ? pct(row[f]) : f === 'paper_days' ? d3.format(',')(row[f]) : row[f];
+    el.textContent = f === 'trump_avg' || f === 'clinton_avg' || f === 'trump_first_share' ? (row[f] == null ? '—' : pct(row[f]))
+      : f === 'paper_days' ? d3.format(',')(row[f]) : row[f];
   }
   tk.textContent = '';
   const lead = row.trump_avg >= row.clinton_avg;
@@ -175,8 +217,37 @@ function drawHeader(group) {
   add(pct(row.trump_avg) + ' of ' + groupNoun[group], 't');
   add(' had Trump in their top stories, against ');
   add(pct(row.clinton_avg), 'c');
-  add(' for Clinton. ' + (lead ? 'Trump' : 'Clinton') + ' led on ' + (lead ? row.trump_led : row.clinton_led) + ' of ' + row.days +
-      ' days read. Data is still coming in, so these numbers will move.');
+  add(' for Clinton. ' + (lead ? 'Trump' : 'Clinton') + ' led on ' + (lead ? row.trump_led : row.clinton_led) + ' of ' + row.days + ' days read. ');
+  if (row.trump_first_share != null) {
+    const tf = row.trump_first_share >= 0.5;
+    add('When a front page mentioned either, ');
+    add((tf ? 'Trump' : 'Clinton') + ' was named first ' + pct(tf ? row.trump_first_share : 1 - row.trump_first_share) + ' of the time', tf ? 't' : 'c');
+    add('. ');
+  }
+  add('Data is still coming in, so these numbers will move.');
+}
+
+function drawMonths(group) {
+  const box = document.getElementById('months');
+  const mf = dash.data('monthly_first');
+  box.textContent = '';
+  if (mf.status !== 'ok') return;
+  box.classList.remove('dash-skeleton');
+  const rows = mf.data.filter(r => r.group === group).sort((a, b) => a.month.localeCompare(b.month));
+  if (!rows.length) { const p = document.createElement('p'); p.className = 'tc-note'; p.textContent = 'Not read yet.'; box.appendChild(p); return; }
+  const monthFmt = d3.utcFormat('%B');
+  for (const r of rows) {
+    const row = document.createElement('div'); row.className = 'tc-month';
+    const lab = document.createElement('span'); lab.className = 'm'; lab.textContent = monthFmt(new Date(r.month + '-01T00:00:00Z'));
+    const bar = document.createElement('div'); bar.className = 'tc-split';
+    const t = document.createElement('div'); t.className = 't'; t.style.flexGrow = r.trump_first;
+    const c = document.createElement('div'); c.className = 'c'; c.style.flexGrow = r.clinton_first;
+    const tl = document.createElement('span'); tl.textContent = 'Trump ' + pct(r.trump_first_share); t.appendChild(tl);
+    const cl = document.createElement('span'); cl.textContent = pct(1 - r.trump_first_share) + ' Clinton'; c.appendChild(cl);
+    bar.append(t, c);
+    const n = document.createElement('span'); n.className = 'n'; n.textContent = (r.trump_first + r.clinton_first) + ' pages';
+    row.append(lab, bar, n); box.appendChild(row);
+  }
 }
 
 function drawChart(group) {
@@ -284,10 +355,11 @@ function drawTable(group) {
       const lab = document.createElement('span'); lab.textContent = pct(r[k]);
       wrap.append(bar, lab); c.appendChild(wrap);
     }
+    td(r.trump_first_share == null ? '—' : pct(r.trump_first_share), 'num');
     tb.appendChild(tr);
   }
 }
 
-window.tcDraw = () => { const g = window.tcGroup; drawHeader(g); drawChart(g); drawTable(g); };
+window.tcDraw = () => { const g = window.tcGroup; drawHeader(g); drawChart(g); drawMonths(g); drawTable(g); };
 dash.onData(window.tcDraw);
 </script>
