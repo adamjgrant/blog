@@ -85,13 +85,21 @@ OUTLETS = {
     "tpm":           "Talking Points Memo",
 }
 
+# Non-US newspapers with large American readerships (partial PastPages coverage).
+INTL = {
+    "daily-mail": "Daily Mail",
+    "guardian":   "The Guardian",
+}
+
 # group -> (sites, daily csv, summary md, heading)
 GROUPS = {
     "newspapers": (PAPERS, "pastpages_daily.csv", "pastpages_summary.md", "US newspaper front pages"),
     "outlets": (OUTLETS, "pastpages_outlets_daily.csv", "pastpages_outlets_summary.md",
                 "US broadcast / online news homepages"),
+    "intl": (INTL, "pastpages_intl_daily.csv", "pastpages_intl_summary.md",
+             "UK newspapers widely read in the US"),
 }
-NAMES = {**PAPERS, **OUTLETS}
+NAMES = {**PAPERS, **OUTLETS, **INTL}
 
 # --- mention detection (tolerant of OCR dropping spaces) -----------------------
 TRUMP_FAMILY = re.compile(r"(Melania|[Il]?vanka|Eric|Tiffany|Barron|Lara)\s*Trump|Trump,?\s*Jr|Donald\s*Trump\s*Jr", re.I)
@@ -263,6 +271,10 @@ def cmd_run(args):
     idx = build_index(args)
     papers = args.papers.split(",") if args.papers else list(GROUPS[args.group][0])
     days = list(daterange(args.start, args.end))
+    # Coarse-to-fine day order (every 8th day, then the midpoints, ...) so interim
+    # results already span the whole window.
+    order = {r: i for i, r in enumerate([0, 4, 2, 6, 1, 5, 3, 7])}
+    days.sort(key=lambda d: (order[(d - args.start).days % 8], d))
     todo = [(s, d) for d in days for s in papers if not ocr_path(s, d).exists()]
     logging.info("run: %d papers x %d days, %d to do", len(papers), len(days), len(todo))
     counts = defaultdict(int)

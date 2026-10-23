@@ -1,0 +1,60 @@
+date,paper,name,group,top_trump,top_clinton,deep_trump,deep_clinton
+2016-05-08,boston-globe,The Boston Globe,newspapers,1,1,1,1
+2016-05-08,cedar-rapids-gazette,The Gazette (Cedar Rapids),newspapers,0,0,1,0
+2016-05-08,dallasnewscom,The Dallas Morning News,newspapers,0,0,0,0
+2016-05-08,denver-post,The Denver Post,newspapers,0,0,1,1
+2016-05-08,missourian,Columbia Missourian,newspapers,0,0,0,0
+2016-05-08,philly-com,The Philadelphia Inquirer (philly.com),newspapers,0,0,0,0
+2016-05-08,san-francisco-chronicle,San Francisco Chronicle,newspapers,0,0,0,0
+2016-05-08,seattle-times,The Seattle Times,newspapers,1,1,1,1
+2016-05-08,spokesman-review,The Spokesman-Review (Spokane),newspapers,1,0,1,0
+2016-05-08,stltoday,St. Louis Post-Dispatch,newspapers,0,0,1,1
+2016-05-08,usa-today,USA Today,newspapers,1,0,1,0
+2016-05-08,wall-street-journal,The Wall Street Journal,newspapers,1,0,1,1
+2016-05-09,boston-globe,The Boston Globe,newspapers,1,0,1,1
+2016-05-09,cedar-rapids-gazette,The Gazette (Cedar Rapids),newspapers,0,0,1,0
+2016-05-09,dallasnewscom,The Dallas Morning News,newspapers,0,0,0,0
+2016-05-09,denver-post,The Denver Post,newspapers,1,1,1,1
+2016-05-09,missourian,Columbia Missourian,newspapers,1,1,1,1
+2016-05-09,philly-com,The Philadelphia Inquirer (philly.com),newspapers,0,0,1,0
+2016-05-09,san-francisco-chronicle,San Francisco Chronicle,newspapers,0,0,0,0
+2016-05-09,seattle-times,The Seattle Times,newspapers,0,0,0,0
+2016-05-09,spokesman-review,The Spokesman-Review (Spokane),newspapers,0,0,1,0
+2016-05-09,stltoday,St. Louis Post-Dispatch,newspapers,0,0,1,1
+2016-05-09,usa-today,USA Today,newspapers,1,0,1,0
+2016-05-09,wall-street-journal,The Wall Street Journal,newspapers,1,1,1,1
+2016-05-10,boston-globe,The Boston Globe,newspapers,1,0,1,0
+2016-05-10,cedar-rapids-gazette,The Gazette (Cedar Rapids),newspapers,0,0,1,1
+2016-05-10,dallasnewscom,The Dallas Morning News,newspapers,0,0,0,0
+2016-05-10,denver-post,The Denver Post,newspapers,0,0,1,1
+2016-05-10,missourian,Columbia Missourian,newspapers,0,0,1,1
+2016-05-10,philly-com,The Philadelphia Inquirer (philly.com),newspapers,0,0,0,0
+2016-05-10,san-francisco-chronicle,San Francisco Chronicle,newspapers,0,0,1,1
+2016-05-10,seattle-times,The Seattle Times,newspapers,0,0,1,0
+2016-05-10,spokesman-review,The Spokesman-Review (Spokane),newspapers,0,0,0,0
+2016-05-10,stltoday,St. Louis Post-Dispatch,newspapers,0,0,1,0
+2016-05-10,usa-today,USA Today,newspapers,1,1,1,1
+2016-05-10,wall-street-journal,The Wall Street Journal,newspapers,1,1,1,1
+2016-05-11,boston-globe,The Boston Globe,newspapers,0,0,1,0
+2016-05-11,dallasnewscom,The Dallas Morning News,newspapers,1,0,1,0
+2016-05-11,denver-post,The Denver Post,newspapers,0,0,0,1
+2016-05-11,philly-com,The Philadelphia Inquirer (philly.com),newspapers,0,0,0,0
+2016-05-11,san-francisco-chronicle,San Francisco Chronicle,newspapers,0,0,0,1
+2016-05-11,seattle-times,The Seattle Times,newspapers,0,0,1,1
+2016-05-11,stltoday,St. Louis Post-Dispatch,newspapers,1,0,1,0
+2016-05-11,usa-today,USA Today,newspapers,1,1,1,1
+2016-05-11,wall-street-journal,The Wall Street Journal,newspapers,0,1,1,1
+2016-05-16,boston-globe,The Boston Globe,newspapers,1,0,1,1
+2016-05-16,usa-today,USA Today,newspapers,1,1,1,1
+2016-05-16,wall-street-journal,The Wall Street Journal,newspapers,1,1,1,1
+2016-08-01,boston-globe,The Boston Globe,newspapers,1,1,1,1
+2016-08-01,usa-today,USA Today,newspapers,1,0,1,1
+2016-08-01,wall-street-journal,The Wall Street Journal,newspapers,1,1,1,1
+2016-08-02,boston-globe,The Boston Globe,newspapers,1,0,1,1
+2016-08-02,usa-today,USA Today,newspapers,1,1,1,1
+2016-08-02,wall-street-journal,The Wall Street Journal,newspapers,1,1,1,1
+2016-09-27,bloomberg,Bloomberg,outlets,0,0,1,1
+2016-09-27,cnn,CNN,outlets,1,1,1,1
+2016-09-27,drudge-report,Drudge Report,outlets,1,1,1,1
+2016-09-27,fox-news,Fox News,outlets,1,1,1,1
+2016-09-27,tpm,Talking Points Memo,outlets,1,1,1,1
