@@ -2,16 +2,22 @@
   .tc { --trump: #c2412d; --clinton: #2c64b0; display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tc { --trump: #f07a63; --clinton: #79a7ee; } }
   :root[data-theme="dark"] .tc { --trump: #f07a63; --clinton: #79a7ee; }
-  .tc-head { display: grid; gap: var(--cds-gap-sm); }
+  .tc-hero { display: grid; gap: var(--cds-gap-md); padding-block: var(--cds-pad-lg); }
+  .tc-eyebrow { margin: 0; font-size: var(--cds-font-size-caption); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-fg-muted); }
   .tc-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
-  .tc-takeaway { margin: 0; max-width: 62ch; font-size: var(--cds-font-size-body); line-height: 1.5; }
+  .tc-big { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--cds-gap-sm) var(--cds-gap-md); }
+  .tc-big .num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: clamp(4rem, 14vw, 8rem); line-height: 0.95; color: var(--trump); font-variant-numeric: tabular-nums; min-width: 3ch; }
+  .tc-big .lab { max-width: 28ch; font-size: var(--cds-font-size-heading); line-height: 1.35; text-wrap: balance; }
+  .tc-big .lab b { color: var(--trump); font-weight: 600; }
+  .tc-hero-split { display: flex; height: 2.75rem; border-radius: 6px; overflow: hidden; gap: 3px; min-height: 2.75rem; }
+  .tc-hero-split > div { flex-basis: 0; min-width: 0; display: flex; align-items: center; padding: 0 var(--cds-pad-sm); color: var(--color-bg); font-size: var(--cds-font-size-body); font-weight: 600; white-space: nowrap; overflow: hidden; font-variant-numeric: tabular-nums; }
+  .tc-hero-split .t { background: var(--trump); }
+  .tc-hero-split .c { background: var(--clinton); justify-content: flex-end; }
+  .tc-takeaway { margin: 0; max-width: 64ch; font-size: var(--cds-font-size-body); line-height: 1.55; }
   .tc-takeaway b { font-weight: 600; }
   .tc-takeaway .t { color: var(--trump); }
   .tc-takeaway .c { color: var(--clinton); }
-  .tc-groups { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
-  .tc-groups button { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-radius: 999px; border: 1px solid var(--color-border-line); background: transparent; color: var(--color-fg-muted); cursor: pointer; }
-  .tc-groups button[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
-  .tc-groups button:focus-visible { outline: 2px solid var(--clinton); outline-offset: 2px; }
+  .tc-section { margin: var(--cds-gap-md) 0 0; font-size: var(--cds-font-size-caption); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-fg-muted); border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-md); }
   .tc-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: var(--cds-gap-md); }
   .tc-tile { display: grid; gap: var(--cds-gap-xs); align-content: start; }
   .tc-tile .k { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
@@ -19,13 +25,14 @@
   .tc-tile.trump .v { color: var(--trump); }
   .tc-tile.clinton .v { color: var(--clinton); }
   .tc-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); min-width: 0; }
-  .tc-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+  .tc-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); text-wrap: balance; }
   .tc-note { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); max-width: 70ch; line-height: 1.5; }
-  .tc-legend { display: flex; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .tc-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
   .tc-legend span::before { content: ""; display: inline-block; width: 0.75rem; height: 2px; margin-right: 0.375rem; vertical-align: middle; background: currentColor; }
   .tc-legend .t { color: var(--trump); } .tc-legend .c { color: var(--clinton); }
+  .tc-legend .dot::before { width: 0.4rem; height: 0.4rem; border-radius: 50%; opacity: 0.45; }
   .tc-chart { position: relative; min-height: 320px; }
-  .tc-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); display: grid; gap: 2px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .tc-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); display: grid; gap: 2px; white-space: nowrap; font-variant-numeric: tabular-nums; z-index: 2; }
   .tc-tip .d { color: var(--cds-text-secondary); }
   .tc-tip i { display: inline-block; width: 0.5rem; height: 0.5rem; border-radius: 50%; margin-right: 0.375rem; }
   .tc-tablebox { overflow-x: auto; }
@@ -36,15 +43,20 @@
   .tc-bar { display: flex; align-items: center; gap: var(--cds-gap-xs); min-width: 7rem; }
   .tc-bar b { display: block; height: 6px; border-radius: 3px; }
   .tc-bar.t b { background: var(--trump); } .tc-bar.c b { background: var(--clinton); }
-  .tc-months { display: grid; gap: var(--cds-gap-sm); min-height: 12rem; }
+  .tc-months, .tc-papers { display: grid; gap: var(--cds-gap-sm); min-height: 12rem; }
   .tc-month { display: grid; grid-template-columns: 5.5rem 1fr 4.5rem; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
-  .tc-month .m { color: var(--color-fg-muted); }
-  .tc-month .n { color: var(--color-fg-muted); text-align: right; }
-  .tc-split { display: flex; height: 1.5rem; border-radius: 4px; overflow: hidden; gap: 2px; }
+  .tc-paper { display: grid; grid-template-columns: minmax(7rem, 13rem) 1fr 4.5rem; align-items: center; gap: var(--cds-gap-sm); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .tc-month .m, .tc-paper .m { color: var(--color-fg-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tc-month .n, .tc-paper .n { color: var(--color-fg-muted); text-align: right; }
+  .tc-split { display: flex; height: 1.5rem; border-radius: 4px; overflow: hidden; gap: 2px; position: relative; }
   .tc-split > div { flex-basis: 0; min-width: 0; display: flex; align-items: center; padding: 0 var(--cds-pad-xs); color: var(--color-bg); white-space: nowrap; overflow: hidden; }
   .tc-split .t { background: var(--trump); }
   .tc-split .c { background: var(--clinton); justify-content: flex-end; }
-  @media (max-width: 30rem) { .tc-month { grid-template-columns: 4.5rem 1fr; } .tc-month .n { display: none; } }
+  .tc-split .half { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 0; border-left: 1px dashed var(--color-fg); opacity: 0.55; padding: 0; }
+  @media (max-width: 30rem) {
+    .tc-month { grid-template-columns: 4.5rem 1fr; } .tc-month .n { display: none; }
+    .tc-paper { grid-template-columns: 1fr; gap: 2px; } .tc-paper .n { display: none; }
+  }
   [data-dash-source-state=empty] { color: transparent; }
   [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
   .tc-fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); min-height: 320px; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
@@ -52,40 +64,55 @@
 </style>
 
 <div class="tc">
-  <header class="tc-head">
-    <h1 class="tc-title" id="title">Trump vs. Clinton on the front page</h1>
-    <p class="tc-takeaway dash-skeleton" id="takeaway" data-source="summary">—</p>
-    <div class="tc-groups" role="group" aria-label="Which publications">
-      <button type="button" data-group="newspapers" aria-pressed="true">US newspapers</button>
-      <button type="button" data-group="outlets" aria-pressed="false">US TV &amp; online</button>
-      <button type="button" data-group="intl" aria-pressed="false">UK papers read in the US</button>
+  <header class="tc-hero" id="title">
+    <p class="tc-eyebrow">Front pages, May 8 – Nov 7, 2016</p>
+    <h1 class="tc-title">Who did readers meet first?</h1>
+    <div class="tc-big">
+      <span class="num dash-skeleton" data-source="summary" data-field="trump_first_share" data-row="0">—</span>
+      <span class="lab">of front pages that mentioned either candidate named <b>Trump</b> before Clinton</span>
     </div>
+    <div class="tc-hero-split dash-skeleton" id="hero-split" data-source="summary"></div>
+    <p class="tc-takeaway dash-skeleton" id="takeaway" data-source="summary">—</p>
   </header>
 
+  <section class="tc-card" id="first-daily">
+    <h2>Trump named first, day by day</h2>
+    <p class="tc-note">Each dot is one day: of the front pages that mentioned either candidate, the share that named Trump first. The line is a 7-day average. Above the dashed 50% line, Trump came first more often than Clinton.</p>
+    <div class="tc-legend"><span class="t">7-day average</span><span class="t dot">One day</span></div>
+    <div class="tc-chart dash-skeleton" id="first-chart" data-source="first_daily events"></div>
+  </section>
+
+  <section class="tc-card" id="named-first">
+    <h2>Who a reader met first, by month</h2>
+    <p class="tc-note">Of front pages that mentioned either candidate, the share where Trump was named before Clinton reading down the page.</p>
+    <div class="tc-months dash-skeleton" id="months" data-source="monthly_first"></div>
+  </section>
+
+  <section class="tc-card" id="first-by-paper">
+    <h2>Who each publication named first</h2>
+    <p class="tc-note">Share of each publication's front pages (that mentioned either candidate) naming Trump first. The dashed line marks an even split.</p>
+    <div class="tc-papers dash-skeleton" id="papers" data-source="by_paper"></div>
+  </section>
+
+  <p class="tc-section">How much space each candidate got</p>
+
   <section class="tc-tiles" id="tiles">
-    <div class="tc-tile trump"><span class="k">Avg. share of papers with Trump in top stories</span><span class="v dash-skeleton" data-source="summary" data-field="trump_avg">—</span></div>
-    <div class="tc-tile clinton"><span class="k">Avg. share of papers with Clinton in top stories</span><span class="v dash-skeleton" data-source="summary" data-field="clinton_avg">—</span></div>
-    <div class="tc-tile trump"><span class="k">Front pages that named Trump before Clinton</span><span class="v dash-skeleton" data-source="summary" data-field="trump_first_share">—</span></div>
-    <div class="tc-tile"><span class="k">Days Trump led / Clinton led</span><span class="v dash-skeleton" data-source="summary" data-field="days_split">—</span></div>
-    <div class="tc-tile"><span class="k">Front pages read</span><span class="v dash-skeleton" data-source="summary" data-field="paper_days">—</span></div>
+    <div class="tc-tile trump"><span class="k">Avg. share of front pages with Trump in the top stories</span><span class="v dash-skeleton" data-source="summary" data-field="trump_avg" data-row="0">—</span></div>
+    <div class="tc-tile clinton"><span class="k">Avg. share of front pages with Clinton in the top stories</span><span class="v dash-skeleton" data-source="summary" data-field="clinton_avg" data-row="0">—</span></div>
+    <div class="tc-tile"><span class="k">Days Trump led / Clinton led</span><span class="v dash-skeleton" data-source="summary" data-field="days_split" data-row="0">—</span></div>
+    <div class="tc-tile"><span class="k">Front pages read</span><span class="v dash-skeleton" data-source="summary" data-field="paper_days" data-row="0">—</span></div>
   </section>
 
   <section class="tc-card" id="daily-chart">
     <h2>Share of front pages with each candidate in the top stories, by day</h2>
-    <p class="tc-note">Each point is one day: the share of papers whose top stories (roughly the first screen of the homepage, around 10am Eastern) mention the candidate. Gaps are days not yet processed or not captured.</p>
+    <p class="tc-note">Each point is one day: the share of publications whose top stories (roughly the first screen of the homepage, around 10am Eastern) mention the candidate.</p>
     <div class="tc-legend"><span class="t">Trump</span><span class="c">Clinton</span></div>
     <div class="tc-chart dash-skeleton" id="chart" data-source="daily events"></div>
   </section>
 
-  <section class="tc-card" id="named-first">
-    <h2>Who a reader meets first, by month</h2>
-    <p class="tc-note">Of front pages that mention either candidate, the share where Trump is named before Clinton reading down the page.</p>
-    <div class="tc-months dash-skeleton" id="months" data-source="monthly_first"></div>
-  </section>
-
   <section class="tc-card" id="by-paper">
     <h2>By publication</h2>
-    <p class="tc-note">Share of days each publication had the candidate in its top stories.</p>
+    <p class="tc-note">Share of days each publication had the candidate in its top stories, and how often it named Trump first.</p>
     <div class="tc-tablebox">
       <table class="tc-table" data-source="by_paper" data-row-key="name">
         <thead><tr>
@@ -100,58 +127,71 @@
     </div>
   </section>
 
-  <p class="tc-note" id="method">Source: PastPages homepage screenshots (pastpages.org, archived on archive.org), read with OCR. One capture per publication per day, nearest 10am Eastern, May 8 – Nov 7, 2016. "Top stories" is any text in the first 1,200 pixels of the page. Mentions of Melania, Ivanka, Bill or Chelsea, and paid ads, are not counted. The New York Times and Washington Post are not in the archive for this period. NPR was dropped because its 2016 captures rendered without styling; the Denver Post and philly.com have fewer usable days for the same reason, and a capture without enough readable text is left out rather than counted as "no mention".</p>
+  <p class="tc-note" id="method">Source: PastPages homepage screenshots (pastpages.org, archived on archive.org), read with OCR. 19 publications, US and international: one capture per publication per day, nearest 10am Eastern, May 8 – Nov 7, 2016. "Top stories" is any text in the first 1,200 pixels of the page; "named first" reads down the whole captured page, and when one line names both candidates, whoever comes first in the line wins. Mentions of Melania, Ivanka, Bill or Chelsea, and paid ads, are not counted. The New York Times and Washington Post are not in the archive for this period. NPR was dropped because its 2016 captures rendered without styling; the Denver Post and philly.com have fewer usable days for the same reason, and a capture without enough readable text is left out rather than counted as "no mention".</p>
 </div>
 
 <script>
 dash.calc('daily', {
   inputs: ['paper_days'],
   title: 'Daily share of front pages',
-  description: 'Per group and day: share of publications with each candidate in the top stories.',
+  description: 'Per day: share of publications with each candidate in the top stories, and how many named each candidate first.',
   fn: (paper_days) => {
     const m = new Map();
     for (const r of paper_days) {
-      const k = r.group + '|' + r.date;
-      const o = m.get(k) || { group: r.group, date: r.date, papers: 0, t: 0, c: 0 };
+      const o = m.get(r.date) || { date: r.date, papers: 0, t: 0, c: 0, ft: 0, fc: 0 };
       o.papers += 1; o.t += Number(r.top_trump); o.c += Number(r.top_clinton);
-      m.set(k, o);
+      if (r.first === 'trump') o.ft += 1; else if (r.first === 'clinton') o.fc += 1;
+      m.set(r.date, o);
     }
-    return [...m.values()].map(o => ({ group: o.group, date: o.date, papers: o.papers, trump_pct: o.t / o.papers, clinton_pct: o.c / o.papers }));
+    return [...m.values()].map(o => ({ date: o.date, papers: o.papers, trump_pct: o.t / o.papers, clinton_pct: o.c / o.papers,
+      trump_first: o.ft, clinton_first: o.fc }));
+  }
+});
+
+dash.calc('first_daily', {
+  inputs: ['daily'],
+  title: 'Trump named first, by day',
+  description: 'Per day: share of front pages naming either candidate that named Trump first, plus a 7-day average pooled over the surrounding days.',
+  fn: (daily) => {
+    const days = daily.filter(d => d.trump_first + d.clinton_first > 0).sort((a, b) => a.date.localeCompare(b.date));
+    const t = days.map(d => Date.parse(d.date + 'T00:00:00Z'));
+    return days.map((d, i) => {
+      let ft = 0, fc = 0;
+      days.forEach((e, j) => { if (Math.abs(t[j] - t[i]) <= 3 * 864e5) { ft += e.trump_first; fc += e.clinton_first; } });
+      return { date: d.date, named: d.trump_first + d.clinton_first, trump_first: d.trump_first, clinton_first: d.clinton_first,
+        share: d.trump_first / (d.trump_first + d.clinton_first), avg7: ft / (ft + fc) };
+    });
   }
 });
 
 dash.calc('summary', {
-  inputs: ['daily', 'paper_days'],
+  inputs: ['daily'],
   title: 'Headline figures',
-  description: 'Per group: mean of the daily shares, days each candidate led, front pages read, and which candidate was named first.',
-  fn: (daily, paper_days) => {
-    const g = new Map();
+  description: 'Mean of the daily top-story shares, days each candidate led, front pages read, and the share of front pages naming Trump first.',
+  fn: (daily) => {
+    let ts = 0, cs = 0, tl = 0, cl = 0, pd = 0, ft = 0, fc = 0, fdt = 0, fdc = 0;
     for (const d of daily) {
-      const o = g.get(d.group) || { group: d.group, days: 0, ts: 0, cs: 0, tl: 0, cl: 0, pd: 0, ft: 0, fc: 0 };
-      o.days += 1; o.ts += d.trump_pct; o.cs += d.clinton_pct; o.pd += d.papers;
-      if (d.trump_pct > d.clinton_pct) o.tl += 1; else if (d.clinton_pct > d.trump_pct) o.cl += 1;
-      g.set(d.group, o);
+      ts += d.trump_pct; cs += d.clinton_pct; pd += d.papers; ft += d.trump_first; fc += d.clinton_first;
+      if (d.trump_pct > d.clinton_pct) tl += 1; else if (d.clinton_pct > d.trump_pct) cl += 1;
+      if (d.trump_first > d.clinton_first) fdt += 1; else if (d.clinton_first > d.trump_first) fdc += 1;
     }
-    for (const r of paper_days) {
-      const o = g.get(r.group);
-      if (r.first === 'trump') o.ft += 1; else if (r.first === 'clinton') o.fc += 1;
-    }
-    return [...g.values()].map(o => ({ group: o.group, days: o.days, trump_avg: o.ts / o.days, clinton_avg: o.cs / o.days,
-      trump_led: o.tl, clinton_led: o.cl, days_split: o.tl + ' / ' + o.cl, paper_days: o.pd,
-      named_either: o.ft + o.fc, trump_first_share: o.ft + o.fc ? o.ft / (o.ft + o.fc) : null }));
+    return [{ days: daily.length, trump_avg: ts / daily.length, clinton_avg: cs / daily.length,
+      trump_led: tl, clinton_led: cl, days_split: tl + ' / ' + cl, paper_days: pd,
+      trump_first: ft, clinton_first: fc, named_either: ft + fc, trump_first_share: ft + fc ? ft / (ft + fc) : null,
+      first_days_trump: fdt, first_days_clinton: fdc }];
   }
 });
 
 dash.calc('monthly_first', {
   inputs: ['paper_days'],
   title: 'Named first, by month',
-  description: 'Per group and month: of front pages naming either candidate, how many named Trump first and how many Clinton.',
+  description: 'Per month: of front pages naming either candidate, how many named Trump first and how many Clinton.',
   fn: (paper_days) => {
     const m = new Map();
     for (const r of paper_days) {
       if (r.first !== 'trump' && r.first !== 'clinton') continue;
-      const k = r.group + '|' + r.date.slice(0, 7);
-      const o = m.get(k) || { group: r.group, month: r.date.slice(0, 7), trump_first: 0, clinton_first: 0 };
+      const k = r.date.slice(0, 7);
+      const o = m.get(k) || { month: k, trump_first: 0, clinton_first: 0 };
       if (r.first === 'trump') o.trump_first += 1; else o.clinton_first += 1;
       m.set(k, o);
     }
@@ -162,129 +202,89 @@ dash.calc('monthly_first', {
 dash.calc('by_paper', {
   inputs: ['paper_days'],
   title: 'By publication',
-  description: 'Per publication: days read and share of those days with each candidate in the top stories.',
+  description: 'Per publication: days read, share of those days with each candidate in the top stories, and share naming Trump first.',
   fn: (paper_days) => {
     const m = new Map();
     for (const r of paper_days) {
-      const o = m.get(r.name) || { name: r.name, group: r.group, days: 0, t: 0, c: 0, ft: 0, fc: 0 };
+      const o = m.get(r.name) || { name: r.name, days: 0, t: 0, c: 0, ft: 0, fc: 0 };
       o.days += 1; o.t += Number(r.top_trump); o.c += Number(r.top_clinton);
       if (r.first === 'trump') o.ft += 1; else if (r.first === 'clinton') o.fc += 1;
       m.set(r.name, o);
     }
-    return [...m.values()].map(o => ({ name: o.name, group: o.group, days: o.days, trump_share: o.t / o.days, clinton_share: o.c / o.days,
-      trump_first_share: o.ft + o.fc ? o.ft / (o.ft + o.fc) : null }));
+    return [...m.values()].map(o => ({ name: o.name, days: o.days, trump_share: o.t / o.days, clinton_share: o.c / o.days,
+      named_either: o.ft + o.fc, trump_first_share: o.ft + o.fc ? o.ft / (o.ft + o.fc) : null }));
   }
-});
-
-window.tcGroup = 'newspapers';
-document.querySelectorAll('.tc-groups button').forEach(b => {
-  b.addEventListener('click', () => {
-    window.tcGroup = b.dataset.group;
-    document.querySelectorAll('.tc-groups button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    window.tcDraw && window.tcDraw();
-  });
 });
 </script>
 
 <script>
 const pct = d3.format('.0%');
 const fmtDay = d3.utcFormat('%b %-d');
-const groupNoun = { newspapers: 'US newspapers', outlets: 'US TV and online outlets', intl: 'UK papers' };
+const monthFmt = d3.utcFormat('%B');
+const muted = 'var(--color-fg-muted)';
+const parseDay = (s) => new Date(s + 'T00:00:00Z');
 
-function drawHeader(group) {
+function unskel(el) { el.classList.remove('dash-skeleton'); }
+
+function failLine(box) {
+  const f = document.createElement('div'); f.className = 'tc-fail'; f.textContent = 'Failed to load'; box.appendChild(f);
+}
+
+function splitBar(container, tShare, tLabel, cLabel, withHalf) {
+  const t = document.createElement('div'); t.className = 't'; t.style.flexGrow = tShare;
+  const c = document.createElement('div'); c.className = 'c'; c.style.flexGrow = 1 - tShare;
+  const tl = document.createElement('span'); tl.textContent = tLabel; t.appendChild(tl);
+  const cl = document.createElement('span'); cl.textContent = cLabel; c.appendChild(cl);
+  container.append(t, c);
+  if (withHalf) { const h = document.createElement('div'); h.className = 'half'; container.appendChild(h); }
+}
+
+function drawHero() {
   const s = dash.data('summary');
+  const big = document.querySelector('.tc-big .num');
+  const split = document.getElementById('hero-split');
   const tk = document.getElementById('takeaway');
-  const tiles = document.querySelectorAll('#tiles [data-source="summary"]');
-  tiles.forEach(el => el.setAttribute('data-where', 'group=' + group));
-  if (s.status !== 'ok') { tiles.forEach(el => { el.textContent = '—'; }); tk.textContent = '—'; return; }
-  const row = s.data.find(r => r.group === group);
-  tiles.forEach(el => el.classList.remove('dash-skeleton'));
-  tk.classList.remove('dash-skeleton');
-  if (!row) {
-    tiles.forEach(el => { el.textContent = '—'; });
-    tk.textContent = 'No front pages from this group could be read.';
-    return;
-  }
-  for (const el of tiles) {
-    const f = el.dataset.field;
-    el.textContent = f === 'trump_avg' || f === 'clinton_avg' || f === 'trump_first_share' ? (row[f] == null ? '—' : pct(row[f]))
-      : f === 'paper_days' ? d3.format(',')(row[f]) : row[f];
-  }
+  split.textContent = '';
+  if (s.status !== 'ok' || !s.data.length) { big.textContent = '—'; tk.textContent = '—'; return; }
+  const r = s.data[0];
+  [big, split, tk].forEach(unskel);
+  big.textContent = r.trump_first_share == null ? '—' : pct(r.trump_first_share);
+  if (r.trump_first_share != null) splitBar(split, r.trump_first_share, 'Trump first ' + pct(r.trump_first_share), pct(1 - r.trump_first_share) + ' Clinton first', false);
   tk.textContent = '';
-  const lead = row.trump_avg >= row.clinton_avg;
   const add = (txt, cls) => { const e = document.createElement(cls ? 'b' : 'span'); if (cls) e.className = cls; e.textContent = txt; tk.appendChild(e); };
-  add('On an average day, ');
-  add(pct(row.trump_avg) + ' of ' + groupNoun[group], 't');
-  add(' had Trump in their top stories, against ');
-  add(pct(row.clinton_avg), 'c');
-  add(' for Clinton. ' + (lead ? 'Trump' : 'Clinton') + ' led on ' + (lead ? row.trump_led : row.clinton_led) + ' of ' + row.days + ' days read. ');
-  if (row.trump_first_share != null) {
-    const tf = row.trump_first_share >= 0.5;
-    add('When a front page mentioned either, ');
-    add((tf ? 'Trump' : 'Clinton') + ' was named first ' + pct(tf ? row.trump_first_share : 1 - row.trump_first_share) + ' of the time', tf ? 't' : 'c');
-    add('. ');
-  }
-  add('Final results, ' + d3.format(',')(row.paper_days) + ' front pages read.');
+  add('Across ' + d3.format(',')(r.paper_days) + ' front pages from 19 publications, ' + d3.format(',')(r.named_either) + ' mentioned at least one candidate. ');
+  add('On ' + r.first_days_trump + ' of ' + r.days + ' days', 't');
+  add(' more front pages named Trump first; Clinton came out ahead on ');
+  add(String(r.first_days_clinton), 'c');
+  add('. Trump was also in the top stories more often: ');
+  add(pct(r.trump_avg) + ' of front pages', 't');
+  add(' on an average day, against ');
+  add(pct(r.clinton_avg), 'c');
+  add(' for Clinton.');
 }
 
-function drawMonths(group) {
-  const box = document.getElementById('months');
-  const mf = dash.data('monthly_first');
-  box.textContent = '';
-  if (mf.status !== 'ok') return;
-  box.classList.remove('dash-skeleton');
-  const rows = mf.data.filter(r => r.group === group).sort((a, b) => a.month.localeCompare(b.month));
-  if (!rows.length) { const p = document.createElement('p'); p.className = 'tc-note'; p.textContent = 'Not read yet.'; box.appendChild(p); return; }
-  const monthFmt = d3.utcFormat('%B');
-  for (const r of rows) {
-    const row = document.createElement('div'); row.className = 'tc-month';
-    const lab = document.createElement('span'); lab.className = 'm'; lab.textContent = monthFmt(new Date(r.month + '-01T00:00:00Z'));
-    const bar = document.createElement('div'); bar.className = 'tc-split';
-    const t = document.createElement('div'); t.className = 't'; t.style.flexGrow = r.trump_first;
-    const c = document.createElement('div'); c.className = 'c'; c.style.flexGrow = r.clinton_first;
-    const tl = document.createElement('span'); tl.textContent = 'Trump ' + pct(r.trump_first_share); t.appendChild(tl);
-    const cl = document.createElement('span'); cl.textContent = pct(1 - r.trump_first_share) + ' Clinton'; c.appendChild(cl);
-    bar.append(t, c);
-    const n = document.createElement('span'); n.className = 'n'; n.textContent = (r.trump_first + r.clinton_first) + ' pages';
-    row.append(lab, bar, n); box.appendChild(row);
-  }
-}
-
-function drawChart(group) {
-  const box = document.getElementById('chart');
-  const dd = dash.data('daily'), ev = dash.data('events');
-  box.querySelectorAll('svg, .tc-tip, .tc-fail').forEach(n => n.remove());
-  if (dd.status === 'error' || ev.status === 'error') {
-    box.classList.remove('dash-skeleton');
-    const f = document.createElement('div'); f.className = 'tc-fail'; f.textContent = 'Failed to load'; box.appendChild(f); return;
-  }
-  if (dd.status !== 'ok' || ev.status !== 'ok') return;
-  box.classList.remove('dash-skeleton');
-  const rows = dd.data.filter(r => r.group === group).map(r => ({ ...r, d: new Date(r.date + 'T00:00:00Z') })).sort((a, b) => a.d - b.d);
-  const events = ev.data.map(e => ({ ...e, d: new Date(e.date + 'T00:00:00Z') }));
+// Shared time axis + event markers; returns the scales and margins.
+function timeFrame(box, svgLabel) {
   const W = Math.max(280, box.clientWidth), H = 320;
-  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
-    .attr('aria-label', 'Daily share of front pages mentioning Trump and Clinton');
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', svgLabel);
   const probe = svg.append('text').attr('font-size', 12).text('100%');
   const left = Math.ceil(probe.node().getComputedTextLength()) + 10; probe.remove();
   const m = { top: 46, right: 12, bottom: 26, left };
-  const x = d3.scaleUtc([new Date('2016-05-08T00:00:00Z'), new Date('2016-11-07T00:00:00Z')], [m.left, W - m.right]);
+  const x = d3.scaleUtc([parseDay('2016-05-08'), parseDay('2016-11-07')], [m.left, W - m.right]);
   const y = d3.scaleLinear([0, 1], [H - m.bottom, m.top]);
-  const muted = 'var(--color-fg-muted)';
   svg.append('g').selectAll('line').data(y.ticks(4)).join('line')
     .attr('x1', m.left).attr('x2', W - m.right).attr('y1', d => y(d)).attr('y2', d => y(d))
     .attr('stroke', 'var(--cds-chart-grid)').attr('stroke-width', 1);
   svg.append('g').selectAll('text').data(y.ticks(4)).join('text')
     .attr('x', m.left - 8).attr('y', d => y(d)).attr('dy', '0.32em').attr('text-anchor', 'end')
     .attr('font-size', 12).attr('fill', muted).text(pct);
-  const xt = W < 520 ? d3.utcMonth.every(2) : d3.utcMonth.every(1);
   svg.append('g').attr('transform', `translate(0,${H - m.bottom})`)
-    .call(d3.axisBottom(x).ticks(xt).tickFormat(d3.utcFormat('%b')).tickSizeOuter(0))
+    .call(d3.axisBottom(x).ticks(W < 520 ? d3.utcMonth.every(2) : d3.utcMonth.every(1)).tickFormat(d3.utcFormat('%b')).tickSizeOuter(0))
     .attr('font-size', null).attr('font-family', null)
     .call(g => g.select('.domain').attr('stroke', 'var(--cds-chart-axis)'))
     .call(g => g.selectAll('.tick line').attr('stroke', 'var(--cds-chart-axis)'))
     .call(g => g.selectAll('.tick text').attr('fill', muted).attr('font-size', 12));
-  // events: dashed rules, labels staggered over three rows, dropped if they would collide
+  const events = dash.data('events').data.map(e => ({ ...e, d: parseDay(e.date) }));
   const evg = svg.append('g');
   const rowEnds = [-Infinity, -Infinity, -Infinity];
   for (const e of events) {
@@ -293,58 +293,157 @@ function drawChart(group) {
       .attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '3 3');
     const t = evg.append('text').attr('font-size', 11).attr('fill', muted).attr('text-anchor', 'middle').text(e.label);
     const w = t.node().getComputedTextLength();
-    let lx = Math.min(Math.max(ex, m.left + w / 2), W - m.right - w / 2);
+    const lx = Math.min(Math.max(ex, m.left + w / 2), W - m.right - w / 2);
     const r = rowEnds.findIndex(end => lx - w / 2 > end + 4);
     if (r < 0) { t.remove(); continue; }
     rowEnds[r] = lx + w / 2;
     t.attr('x', lx).attr('y', 12 + r * 13);
   }
-  const series = [{ key: 'trump_pct', color: 'var(--trump)', name: 'Trump' }, { key: 'clinton_pct', color: 'var(--clinton)', name: 'Clinton' }];
-  for (const s of series) {
-    svg.append('path').datum(rows).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2)
-      .attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round').attr('opacity', 0.85)
-      .attr('d', d3.line().x(d => x(d.d)).y(d => y(d[s.key])));
-    svg.append('g').selectAll('circle').data(rows).join('circle')
-      .attr('cx', d => x(d.d)).attr('cy', d => y(d[s.key])).attr('r', rows.length > 90 ? 1.8 : 3).attr('fill', s.color);
-  }
-  if (!rows.length) {
-    svg.append('text').attr('x', (m.left + W - m.right) / 2).attr('y', H / 2).attr('text-anchor', 'middle')
-      .attr('font-size', 12).attr('fill', muted).text('No front pages read for this group');
-    return;
-  }
-  // tooltip
+  return { svg, x, y, m, W, H, events };
+}
+
+function hover(box, f, rows, onPoint) {
+  const { svg, x, m, W, H } = f;
   const tip = document.createElement('div'); tip.className = 'tc-tip'; tip.hidden = true; box.appendChild(tip);
   const rule = svg.append('line').attr('y1', m.top).attr('y2', H - m.bottom).attr('stroke', 'var(--cds-chart-axis)').attr('opacity', 0);
-  const dots = series.map(s => svg.append('circle').attr('r', 4.5).attr('fill', s.color).attr('stroke', 'var(--color-panel)').attr('stroke-width', 2).attr('opacity', 0));
+  const marks = onPoint.marks();
   svg.append('rect').attr('x', m.left).attr('y', m.top).attr('width', W - m.left - m.right).attr('height', H - m.top - m.bottom)
     .attr('fill', 'transparent')
     .on('pointermove', (evt) => {
       const [px] = d3.pointer(evt);
       const d = d3.least(rows, r => Math.abs(x(r.d) - px));
       rule.attr('x1', x(d.d)).attr('x2', x(d.d)).attr('opacity', 0.6);
-      series.forEach((s, i) => dots[i].attr('cx', x(d.d)).attr('cy', y(d[s.key])).attr('opacity', 1));
+      onPoint.place(marks, d);
       tip.textContent = '';
       const line = (txt, color) => { const e = document.createElement('div'); if (color) { const i = document.createElement('i'); i.style.background = color; e.appendChild(i); } e.appendChild(document.createTextNode(txt)); tip.appendChild(e); return e; };
+      onPoint.lines(line, d);
+      const near = f.events.find(e => +e.d === +d.d); if (near) line(near.event).className = 'd';
+      tip.hidden = false;
+      const scale = box.clientWidth / W, tx = x(d.d) * scale, tw = tip.offsetWidth;
+      tip.style.left = (tx + 12 + tw > box.clientWidth ? Math.max(tx - tw - 12, 0) : tx + 12) + 'px';
+      tip.style.top = (m.top * scale) + 'px';
+    })
+    .on('pointerleave', () => { tip.hidden = true; rule.attr('opacity', 0); onPoint.hide(marks); });
+}
+
+function drawFirstChart() {
+  const box = document.getElementById('first-chart');
+  const fd = dash.data('first_daily'), ev = dash.data('events');
+  box.querySelectorAll('svg, .tc-tip, .tc-fail').forEach(n => n.remove());
+  if (fd.status === 'error' || ev.status === 'error') { unskel(box); failLine(box); return; }
+  if (fd.status !== 'ok' || ev.status !== 'ok') return;
+  unskel(box);
+  const rows = fd.data.map(r => ({ ...r, d: parseDay(r.date) })).sort((a, b) => a.d - b.d);
+  const f = timeFrame(box, 'Daily share of front pages naming Trump first, with 7-day average');
+  const { svg, x, y, m, W } = f;
+  // 50% reference with the two halves labelled
+  svg.append('line').attr('x1', m.left).attr('x2', W - m.right).attr('y1', y(0.5)).attr('y2', y(0.5))
+    .attr('stroke', 'var(--color-fg)').attr('stroke-dasharray', '4 4').attr('opacity', 0.5);
+  svg.append('text').attr('x', W - m.right - 4).attr('y', y(0.5) - 6).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--trump)').text('Trump first more often');
+  svg.append('text').attr('x', W - m.right - 4).attr('y', y(0.5) + 14).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--clinton)').text('Clinton first more often');
+  // area between the average and 50%, tinted by who is ahead
+  const area = (above) => d3.area().x(d => x(d.d)).y0(y(0.5)).y1(d => y(above ? Math.max(d.avg7, 0.5) : Math.min(d.avg7, 0.5)));
+  svg.append('path').datum(rows).attr('d', area(true)).attr('fill', 'var(--trump)').attr('opacity', 0.14);
+  svg.append('path').datum(rows).attr('d', area(false)).attr('fill', 'var(--clinton)').attr('opacity', 0.18);
+  svg.append('g').selectAll('circle').data(rows).join('circle')
+    .attr('cx', d => x(d.d)).attr('cy', d => y(d.share)).attr('r', 2.2)
+    .attr('fill', d => d.share >= 0.5 ? 'var(--trump)' : 'var(--clinton)').attr('opacity', 0.45);
+  svg.append('path').datum(rows).attr('fill', 'none').attr('stroke', 'var(--trump)').attr('stroke-width', 2.5)
+    .attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round')
+    .attr('d', d3.line().x(d => x(d.d)).y(d => y(d.avg7)));
+  hover(box, f, rows, {
+    marks: () => [svg.append('circle').attr('r', 4.5).attr('fill', 'var(--trump)').attr('stroke', 'var(--color-panel)').attr('stroke-width', 2).attr('opacity', 0)],
+    place: (mk, d) => mk[0].attr('cx', x(d.d)).attr('cy', y(d.avg7)).attr('opacity', 1),
+    hide: (mk) => mk[0].attr('opacity', 0),
+    lines: (line, d) => {
+      line(fmtDay(d.d) + ', 2016 · ' + d.named + ' front pages named either').className = 'd';
+      line('Trump first ' + pct(d.share) + ' (' + d.trump_first + ' vs ' + d.clinton_first + ')', d.share >= 0.5 ? 'var(--trump)' : 'var(--clinton)');
+      line('7-day average ' + pct(d.avg7), 'var(--trump)');
+    }
+  });
+}
+
+function drawMonths() {
+  const box = document.getElementById('months');
+  const mf = dash.data('monthly_first');
+  box.textContent = '';
+  if (mf.status !== 'ok') return;
+  unskel(box);
+  for (const r of mf.data.slice().sort((a, b) => a.month.localeCompare(b.month))) {
+    const row = document.createElement('div'); row.className = 'tc-month';
+    const lab = document.createElement('span'); lab.className = 'm'; lab.textContent = monthFmt(parseDay(r.month + '-01'));
+    const bar = document.createElement('div'); bar.className = 'tc-split';
+    splitBar(bar, r.trump_first_share, 'Trump ' + pct(r.trump_first_share), pct(1 - r.trump_first_share) + ' Clinton', true);
+    const n = document.createElement('span'); n.className = 'n'; n.textContent = (r.trump_first + r.clinton_first) + ' pages';
+    row.append(lab, bar, n); box.appendChild(row);
+  }
+}
+
+function drawPapers() {
+  const box = document.getElementById('papers');
+  const bp = dash.data('by_paper');
+  box.textContent = '';
+  if (bp.status !== 'ok') return;
+  unskel(box);
+  const rows = bp.data.filter(r => r.trump_first_share != null && r.named_either >= 10).sort((a, b) => b.trump_first_share - a.trump_first_share);
+  for (const r of rows) {
+    const row = document.createElement('div'); row.className = 'tc-paper';
+    const lab = document.createElement('span'); lab.className = 'm'; lab.textContent = r.name; lab.title = r.name;
+    const bar = document.createElement('div'); bar.className = 'tc-split';
+    splitBar(bar, r.trump_first_share, pct(r.trump_first_share), pct(1 - r.trump_first_share), true);
+    const n = document.createElement('span'); n.className = 'n'; n.textContent = r.named_either + ' pages';
+    row.append(lab, bar, n); box.appendChild(row);
+  }
+}
+
+function drawTiles() {
+  const s = dash.data('summary');
+  const tiles = document.querySelectorAll('#tiles [data-source="summary"]');
+  if (s.status !== 'ok' || !s.data.length) { tiles.forEach(el => { el.textContent = '—'; }); return; }
+  const row = s.data[0];
+  for (const el of tiles) {
+    unskel(el);
+    const f = el.dataset.field;
+    el.textContent = f === 'trump_avg' || f === 'clinton_avg' ? pct(row[f]) : f === 'paper_days' ? d3.format(',')(row[f]) : row[f];
+  }
+}
+
+function drawChart() {
+  const box = document.getElementById('chart');
+  const dd = dash.data('daily'), ev = dash.data('events');
+  box.querySelectorAll('svg, .tc-tip, .tc-fail').forEach(n => n.remove());
+  if (dd.status === 'error' || ev.status === 'error') { unskel(box); failLine(box); return; }
+  if (dd.status !== 'ok' || ev.status !== 'ok') return;
+  unskel(box);
+  const rows = dd.data.map(r => ({ ...r, d: parseDay(r.date) })).sort((a, b) => a.d - b.d);
+  const f = timeFrame(box, 'Daily share of front pages mentioning Trump and Clinton in the top stories');
+  const { svg, x, y } = f;
+  const series = [{ key: 'trump_pct', color: 'var(--trump)' }, { key: 'clinton_pct', color: 'var(--clinton)' }];
+  for (const s of series) {
+    svg.append('path').datum(rows).attr('fill', 'none').attr('stroke', s.color).attr('stroke-width', 2)
+      .attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round').attr('opacity', 0.85)
+      .attr('d', d3.line().x(d => x(d.d)).y(d => y(d[s.key])));
+    svg.append('g').selectAll('circle').data(rows).join('circle')
+      .attr('cx', d => x(d.d)).attr('cy', d => y(d[s.key])).attr('r', 1.8).attr('fill', s.color);
+  }
+  hover(box, f, rows, {
+    marks: () => series.map(s => svg.append('circle').attr('r', 4.5).attr('fill', s.color).attr('stroke', 'var(--color-panel)').attr('stroke-width', 2).attr('opacity', 0)),
+    place: (mk, d) => series.forEach((s, i) => mk[i].attr('cx', x(d.d)).attr('cy', y(d[s.key])).attr('opacity', 1)),
+    hide: (mk) => mk.forEach(c => c.attr('opacity', 0)),
+    lines: (line, d) => {
       line(fmtDay(d.d) + ', 2016 · ' + d.papers + ' publications').className = 'd';
       line('Trump ' + pct(d.trump_pct), 'var(--trump)');
       line('Clinton ' + pct(d.clinton_pct), 'var(--clinton)');
-      const near = events.find(e => +e.d === +d.d); if (near) line(near.event).className = 'd';
-      tip.hidden = false;
-      const scale = box.clientWidth / W, tx = x(d.d) * scale, tw = tip.offsetWidth;
-      tip.style.left = Math.min(Math.max(tx + 12, 0), box.clientWidth - tw) + 'px';
-      if (tx + 12 + tw > box.clientWidth) tip.style.left = Math.max(tx - tw - 12, 0) + 'px';
-      tip.style.top = (m.top * scale) + 'px';
-    })
-    .on('pointerleave', () => { tip.hidden = true; rule.attr('opacity', 0); dots.forEach(c => c.attr('opacity', 0)); });
+    }
+  });
 }
 
-function drawTable(group) {
+function drawTable() {
   const bp = dash.data('by_paper');
   const tb = document.getElementById('paper-rows');
   tb.textContent = '';
   if (bp.status !== 'ok') return;
-  const rows = bp.data.filter(r => r.group === group).sort((a, b) => b.trump_share - a.trump_share);
-  for (const r of rows) {
+  for (const r of bp.data.slice().sort((a, b) => b.trump_share - a.trump_share)) {
     const tr = document.createElement('tr');
     const td = (txt, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; if (txt != null) c.textContent = txt; tr.appendChild(c); return c; };
     td(r.name);
@@ -360,6 +459,5 @@ function drawTable(group) {
   }
 }
 
-window.tcDraw = () => { const g = window.tcGroup; drawHeader(g); drawChart(g); drawMonths(g); drawTable(g); };
-dash.onData(window.tcDraw);
+dash.onData(() => { drawHero(); drawFirstChart(); drawMonths(); drawPapers(); drawTiles(); drawChart(); drawTable(); });
 </script>

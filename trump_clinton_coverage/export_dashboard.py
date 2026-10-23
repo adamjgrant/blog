@@ -23,7 +23,7 @@ def main():
                      "first": r.get("first", "")})
     rows.sort(key=lambda x: (x["date"], x["paper"]))
     with open(OUT / "paper_days.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0]) if rows else ["date"])
+        w = csv.DictWriter(f, fieldnames=list(rows[0]) if rows else ["date"], lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
     print(f"{len(rows)} paper-days -> {OUT / 'paper_days.csv'}")
