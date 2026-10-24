@@ -137,7 +137,7 @@ HARRIS_NOT = re.compile(r"\b(harris\s+county|harris\s+teeter|harris\s+poll|harri
                         r"anita|taylor|keith|jaylen|mary|irie|rookie|ashlyn)\s+harris)\b", re.I)
 AD = re.compile(r"(paid for by|advertisement|sponsored|sign up|subscribe|newsletter|^credit|"
                 r"^photo|for the new york times$|getty images|associated press$)", re.I)
-BOILER_DAYS = 5   # link text seen on this many days for one site = menu/promo, not news
+BOILER_DAYS = 14   # link text seen on this many days for one site = menu/promo, not news
 
 
 def dem_name(d):
