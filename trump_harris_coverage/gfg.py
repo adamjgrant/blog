@@ -134,7 +134,7 @@ HARRIS_NOT = re.compile(r"\b(harris\s+county|harris\s+teeter|harris\s+poll|harri
                         r"devin|jalen|najee|joe|gary|lyndsey|jonathan|chris|kevin|damien|jarrod|"
                         r"zay|demetrius|anthony|will|richard|tommy|rachel|sean|ryan|bryce|teddy|"
                         r"brandon|mark|james|paul|ben|tim|greg|kamari|mike|michael|john|david|"
-                        r"anita|taylor|keith|jaylen|mary|irie|rookie)\s+harris)\b", re.I)
+                        r"anita|taylor|keith|jaylen|mary|irie|rookie|ashlyn)\s+harris)\b", re.I)
 AD = re.compile(r"(paid for by|advertisement|sponsored|sign up|subscribe|newsletter|^credit|"
                 r"^photo|for the new york times$|getty images|associated press$)", re.I)
 BOILER_DAYS = 5   # link text seen on this many days for one site = menu/promo, not news
